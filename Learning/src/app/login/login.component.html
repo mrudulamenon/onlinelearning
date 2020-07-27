@@ -1,0 +1,31 @@
+<div class="py-5">
+    <div class="row">
+        <div class="mx-auto">
+            <!-- form card login  -->
+
+                <div class="card-body">
+                    <form class="form" #userLogin="ngForm" (ngSubmit)="loginUser()">
+                        <div class="form-group">
+                            <label for="uname1">Username</label>
+                            <input name="email" type="text" class="form-control rounded-0"
+                                [(ngModel)]="loginUserDetails.email" #email="ngModel"
+                                [class.is-invalid]="email.invalid && email.touched"
+                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                            <small class="text-danger" [class.d-none]="email.valid || email.untouched">Enter a valid
+                                E-mail</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" class="form-control rounded-0" type="password"
+                                [(ngModel)]="loginUserDetails.password" #password="ngModel"
+                                [class.is-invalid]="password.invalid && password.touched" minlength="6" required>
+                            <small class="text-danger" [class.d-none]="password.valid || password.untouched">Enter a
+                                valid Password(Minimum Length - 6)</small>
+                        </div>
+                        <button type="submit" [disabled]="userLogin.form.invalid" class="btn bg-dark btn-primary">LOG-IN</button>
+                        <div class="text-danger" [class.d-none]="!error">Hi</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

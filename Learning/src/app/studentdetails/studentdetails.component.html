@@ -1,0 +1,40 @@
+<router-outlet></router-outlet>
+<div class="card">
+    <div class="card-header">
+        <h3>{{title}}</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student Id</th>
+                        <th>Roll No</th>
+                        <th>Student Name</th>
+                        <th>E-mail</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Class</th>
+                        <th>Division</th>
+                        <th *ngIf="loggedIn()">Edit</th>
+                        <th *ngIf="loggedIn()">Delete</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr *ngFor='let student of students'>
+                        <td>{{ student.s_id }}</td>
+                        <td>{{ student.roll_no }}</td>
+                        <td>{{ student.s_name }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.s_address }}</td>
+                        <td>{{ student.s_phone }}</td>
+                        <td>{{ student.s_class}}</td>
+                        <td>{{ student.s_div}}</td>
+                        <td *ngIf="loggedIn()" ><a routerLink='edit_student/{{student._id}}' class="btn btn-primary">Edit</a></td>
+                        <td *ngIf="loggedIn()" ><a (click)="deleteStudent(student._id)" style="color:white" class="btn btn-primary">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

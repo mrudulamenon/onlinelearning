@@ -1,0 +1,134 @@
+<div class="py-5">
+    <div class="row">
+        <div class="col-md-6-lg-4-sm-10 mx-auto">
+            <div class="card">
+                <form class="form" #newStu="ngForm" (ngSubmit)="AddStudent(newStu)">
+                    <div class="card-header">
+                        <h3>{{title}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>Fields marked <span class="text-danger">*</span> are mandatory</tr>
+                                    <tr>
+                                        <td><label>Student Id</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="s_id" [(ngModel)]="student.s_id"
+                                                class="form-control rounded-0" #s_id="ngModel"
+                                                [class.is-invalid]="s_id.invalid && s_id.touched" pattern="^[0-9]+$"
+                                                required />
+                                            <small class="text-danger"
+                                                [class.d-none]="s_id.valid || s_id.untouched">Enter
+                                                a number</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Roll No</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="roll_no" [(ngModel)]="student.roll_no"
+                                                class="form-control rounded-0" #roll_no="ngModel"
+                                                [class.is-invalid]="roll_no.invalid && roll_no.touched"
+                                                pattern="^[0-9]+$" required />
+                                            <small class="text-danger"
+                                                [class.d-none]="roll_no.valid || roll_no.untouched">Enter
+                                                a number</small>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Student Name</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="s_name" [(ngModel)]="student.s_name"
+                                                class="form-control rounded-0" #s_name="ngModel"
+                                                [class.is-invalid]="s_name.invalid && s_name.touched" required />
+                                            <small class="text-danger"
+                                                [class.d-none]="s_name.valid || s_name.untouched">Enter
+                                                a name</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label name="email" for="uname1">E-mail</label>
+                                        </td>
+                                        <td>
+                                            <input name="email" type="text" [(ngModel)]="user.email" #email="ngModel"
+                                                [class.is-invalid]="email.invalid && email.touched" class="form-control rounded-0"
+                                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                            <small class="text-danger" [class.d-none]="email.valid || email.untouched">Enter a valid
+                                                E-mail</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Password</label>
+                                        </td>
+                                        <td>
+                                            <input name="password" type="password" [(ngModel)]="user.password"
+                                            #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+                                            class="form-control rounded-0" minlength="6" required>
+                                        <small class="text-danger" [class.d-none]="password.valid || password.untouched">Enter a
+                                            valid Password(Minimum Length - 6)</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Address</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="s_address" [(ngModel)]="student.s_address"
+                                                class="form-control rounded-0" #s_address="ngModel"
+                                                [class.is-invalid]="s_address.invalid && s_address.touched" required />
+                                            <small class="text-danger"
+                                                [class.d-none]="s_address.valid || s_address.untouched">Enter
+                                                Address</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Phone</label></td>
+                                        <td><input type="text" name="s_phone" [(ngModel)]="student.s_phone"
+                                                class="form-control rounded-0" #s_phone="ngModel"
+                                                [class.is-invalid]="s_phone.invalid && s_phone.touched" />
+                                            <small class="text-danger"
+                                                [class.d-none]="s_phone.valid || s_phone.untouched">Enter
+                                                a description</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Standard(Class)</label><span class="text-danger">*</span></td>
+                                        <td>                
+                                            <select name="s_class" id="s_class" [(ngModel)]="student.s_class"
+                                            #s_class="ngModel"
+                                            [class.is-invalid]="s_class.invalid && s_class.touched"
+                                            class="form-control rounded-0" required>
+                                            <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                            <option *ngFor="let dl of s_classes" [value]="dl">{{dl}}</option>
+                                        </select>
+                                            <small class="text-danger"
+                                                [class.d-none]="s_class.valid || s_class.untouched">Enter
+                                                the Class</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Division</label></td>
+                                        <td>
+                                            <select name="s_div" id="s_div" [(ngModel)]="student.s_div"
+                                            #s_div="ngModel"
+                                            [class.is-invalid]="s_div.invalid && s_div.touched"
+                                            class="form-control rounded-0">
+                                            <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                            <option *ngFor="let dl of s_divs" [value]="dl">{{dl}}</option>
+                                        </select>
+                                            <small class="text-danger"
+                                                [class.d-none]="s_div.valid || s_div.untouched">Enter the
+                                                division</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="submit" [disabled]="newStu.form.invalid"
+                                                class="btn btn-primary" value="Submit" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

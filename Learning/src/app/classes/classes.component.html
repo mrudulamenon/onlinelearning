@@ -1,0 +1,124 @@
+<div class="card">
+    <div class="card-header">
+        <h3>{{title}}</h3>
+    </div>
+    <div class="card-body">
+        <button (click)="addClass()" class="btn btn-info" type="button" data-toggle="collapse"
+                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">New Class</button>
+
+            <!-- <button (click)="editClass()" class="btn btn-info mx-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Edit Profile</button> -->
+            <!-- <button (click)="addClass()" class="btn btn-info" type="button">New Class</button>
+            
+            <button (click)="editClass()" class="btn btn-info mx-3" type="button">Edit Profile</button> -->
+            
+        <div>
+            <div class="mx-4">
+            <label class="text-danger">{{msg}}</label>
+            <div class="collapse" id="collapseExample">
+                <!-- <div ng-show="MyValue"> -->
+                <div class="py-5">
+                    <div class="row">
+                        <div class="mx-auto">
+                            <span class="anchor" id="formLogin"></span>
+                            <!-- form card register  -->
+                            <div class="card rounder-0">
+                                <div class="card-header">
+                                    <h3 class="mb-0" *ngIf="edit_id==''">Register</h3>
+                                    <h3 class="mb-0" *ngIf="edit_id!=''">Edit</h3>
+
+                                </div>
+                                <div class="card-body">
+                                    <form class="form" #classform="ngForm" (ngSubmit)="submitClass(classform)">
+                                        <div class="form-group">
+                                            <label name="classs" for="classs">Class</label>
+                                            <label name="classs" for="classs">{{newclass.classs}}</label>
+                                            <input name="classs" type="text" [(ngModel)]="newclass.classs"
+                                                #classs="ngModel" [class.is-invalid]="classs.invalid && classs.touched"
+                                                class="form-control rounded-0" required>
+                                            <small class="text-danger"
+                                                [class.d-none]="classs.valid || classs.untouched">Enter a Class</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label name="section" for="uname1">Section</label>
+                                            <!-- <label name="section" for="uname1">{{newclass.section}}</label> -->
+                                            <select name="section" id="section" [(ngModel)]="newclass.section"
+                                                #section="ngModel"
+                                                [class.is-invalid]="section.invalid && section.touched"
+                                                class="form-control rounded-0" required>
+                                                <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                                <option *ngFor="let dl of sections" [value]="dl">{{dl}}</option>
+                                            </select>
+
+                                            <!-- <input name="section" type="text" [(ngModel)]="newclass.section" #section="ngModel"
+                                                [class.is-invalid]="section.invalid && section.touched" class="form-control rounded-0"
+                                                required> -->
+                                            <small class="text-danger"
+                                                [class.d-none]="section.valid || section.untouched">Enter a
+                                                Section</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label name="subject" for="subject">Subject</label>
+
+                                            <ng-multiselect-dropdown [placeholder]="'custom placeholder'"
+                                                [data]="dropdownList" [(ngModel)]="selectedItems"
+                                                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)" name="subjects" id="subjects" [(ngModel)]="newclass.subjects"
+                                                #subjects="ngModel" [class.is-invalid]="subjects.invalid && subjects.touched" class="rounded-0"
+                                                required>
+                                            </ng-multiselect-dropdown>
+                                            <!-- <input name="subject" type="text" [(ngModel)]="newclass.subject" #subject="ngModel"
+                                                [class.is-invalid]="subject.invalid && subject.touched" class="form-control rounded-0"
+                                                required> -->
+                                                <small class="text-danger"
+                                                [class.d-none]="subjects.valid || subjects.untouched">Enter 
+                                                Subjects</small>
+                                        </div>                                        
+                                        <!-- <div class="form-group">
+                                            <label>Password</label>
+                                            <input name="password" type="password" [(ngModel)]="classs.password"
+                                                #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+                                                class="form-control rounded-0" minlength="6" required>
+                                            <small class="text-danger" [class.d-none]="password.valid || password.untouched">Enter a
+                                                valid Password(Minimum Length - 6)</small>
+                                        </div> -->
+                                        <button type="submit" [disabled]="classform.form.invalid"
+                                            class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive mx-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Subjects</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let classs of classes'>
+                        <td>{{ classs.classs }}</td>
+                        <td>{{ classs.section }}</td>
+                        <td>{{ classs.subjects }}</td>
+                        <td *ngIf="_auth.loggedIn()">
+                            <button (click)="editClass(classs._id)" class="btn btn-info mx-3" type="button"
+                                data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                                aria-controls="collapseExample">Edit</button>
+                        </td>
+                        <td *ngIf="_auth.loggedIn()"><a (click)="deleteClass(class._id)" class="btn btn-info"
+                                style="color:white">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>

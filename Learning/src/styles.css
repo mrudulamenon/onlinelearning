@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-content: center;
+}
+.left{
+    background-color: rgb(200, 236, 245);
+    width: 300px;
+    height: inherit;
+    /* border-radius: 10px; */
+    padding: 5px;
+    margin: 5px;
+}
+.right{
+    background-color: rgb(200, 236, 245);
+    width: inherit;
+    height: inherit;
+    /* width: fit-content; */
+    /* height: 450px; */
+    /* border-radius: 10px; */
+    padding: 5px;
+    margin: 5px;
+}

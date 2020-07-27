@@ -1,0 +1,15 @@
+<nav class="nav flex-column">
+    <a *ngIf="_auth.getUserType()=='admin'" class="nav-link" routerLink="admins">Admins</a>
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link active" routerLink="t_details">Teachers List</a>
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link" routerLink="s_details">Students List</a>
+    <a *ngIf="_auth.getUserType()=='admin'" class="nav-link" routerLink="subjects">Subjects</a>
+    <a *ngIf="_auth.getUserType()=='admin'" class="nav-link" routerLink="class">Class List</a>
+    <a *ngIf="_auth.getUserType()=='admin'" class="nav-link" routerLink="add_teacher">Add Teacher</a>
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link" routerLink="add_student">Add Student</a>    
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link" routerLink="t_upload">Teacher Uploads</a>
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link" routerLink="add_t_upload">Add Teacher Upload</a>
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link" routerLink="s_upload">Student Uploads</a>
+    <a *ngIf="(_auth.getUserType()=='admin')||(_auth.getUserType()=='teacher')" class="nav-link" routerLink="add_s_upload">Add Student Upload</a>
+    
+    
+  </nav>

@@ -1,0 +1,20 @@
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-info">
+    <!-- <a class="navbar-brand" routerLink='/'>My School</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink='/' routerLinkActive="active"> Home </a>
+            </li>           
+        </ul>
+        <ul class="navbar-nav">
+            <a class="nav-link" *ngIf="!loggedIn()" routerLink='/register' routerLinkActive="active"> Register </a>
+            <a class="nav-link" *ngIf="!loggedIn()" routerLink='/login/student' routerLinkActive="active"> Login </a>
+            <a class="nav-link" *ngIf="loggedIn()" style="cursor:pointer" (click)="logoutUser()"> LogOut </a>
+        </ul>
+    </div>
+</nav>
+<h1>{{title}}</h1>

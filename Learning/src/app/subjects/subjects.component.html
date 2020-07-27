@@ -1,0 +1,75 @@
+<div class="card">
+    <div class="card-header">
+        <h3>{{title}}</h3>
+    </div>
+    <div class="card-body">
+        <div>
+            <button (click)="addSubject()" class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">New Subject</button>            
+            <!-- <button (click)="addSubject()" class="btn btn-info" type="button">New Subject</button>            
+            <button (click)="editSubject()" class="btn btn-info mx-3" type="button">Edit Profile</button> -->
+            <br/><br/>
+            <label class="text-danger">{{msg}}</label>
+            <div class="collapse" id="collapseExample">
+                <!-- <div ng-show="MyValue"> -->
+                <div class="py-5">
+                    <div class="row">
+                        <div class="mx-auto">
+                            <span class="anchor" id="formLogin"></span>
+                            <!-- form card register  -->
+                            <div class="card rounder-0">
+                                <div class="card-header">
+                                    <h3 class="mb-0" *ngIf="edit_id==''">Add Subject</h3>
+                                    <h3 class="mb-0" *ngIf="edit_id!=''">Edit Subject</h3>
+
+                                </div>
+                                <div class="card-body">
+                                    <form class="form" #subjectform="ngForm" (ngSubmit)="submitSubject(subjectform)">
+                                        <div class="form-group">
+                                            <label name="subject" for="uname1">Subjectname</label>
+                                            <label name="subject" for="uname1">{{newsubject.subject}}</label>
+                                            <input name="subject" type="text" [(ngModel)]="newsubject.subject" #subject="ngModel"
+                                                [class.is-invalid]="subject.invalid && subject.touched" class="form-control rounded-0"
+                                                required>
+                                            <small class="text-danger" [class.d-none]="subject.valid || subject.untouched">Enter a Subject</small>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label>Password</label>
+                                            <input name="password" type="password" [(ngModel)]="subject.password"
+                                                #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+                                                class="form-control rounded-0" minlength="6" required>
+                                            <small class="text-danger" [class.d-none]="password.valid || password.untouched">Enter a
+                                                valid Password(Minimum Length - 6)</small>
+                                        </div> -->
+                                        <button type="submit" [disabled]="subjectform.form.invalid"
+                                            class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Subject</th> 
+                        <th>Edit</th>                       
+                        <th>Delete</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr *ngFor='let subject of subjects'>
+                        <td>{{ subject.subject }}</td>
+                        <td *ngIf="_auth.loggedIn()">
+                            <button (click)="editSubject(subject._id)" class="btn btn-info mx-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Edit</button>
+                        </td>
+                        <td *ngIf="_auth.loggedIn()" ><a (click)="deleteSubject(subject._id)" class="btn btn-info" style="color:white">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
