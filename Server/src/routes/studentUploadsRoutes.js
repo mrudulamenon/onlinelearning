@@ -32,7 +32,7 @@ studentUploadsRouter.post('/filters_uploads', function (req, res) {
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
     let filterData = req.body;
     console.log(filterData);
-    StudentUploadsData.find({ classs: filterData.classs }, (err, filters_uploads) => {
+    StudentUploadsData.find({ s_u_class: filterData.classs }, (err, filters_uploads) => {
         // if (err) {
         //     console.log("Error");
         //     console.log(err);

@@ -15,7 +15,7 @@ export class StudentuploadComponent implements OnInit {
 
   title: String = "Student Uploads";
   s_uploads: StudentUploadModel[];
-  public filter = { classs: "", subjects: "" };
+  public filter = { classs: ""};
   // filter = <any>{};
   classobjarr = <any>[];
   subobjarr = <any>[];
@@ -35,7 +35,7 @@ export class StudentuploadComponent implements OnInit {
     this.getClasses();
     this.getSubjects();
 
-    if (this.filter.classs == "" && this.filter.subjects == "") {
+    if (this.filter.classs == "") {
       this.getS_Uploads();
     }
     else {

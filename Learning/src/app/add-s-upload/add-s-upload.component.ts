@@ -57,10 +57,13 @@ export class AddSUploadComponent implements OnInit {
   isedit() {    
     this.a_route.params.subscribe(params => {
       this._id = params['_id'];
-    })
+      console.log("id");
+      console.log(this._id);      
+    });
     if (this._id != undefined) {
       this.studentUploadService.editS_Upload(this._id).subscribe((data) => {
         this.s_upload = JSON.parse(JSON.stringify(data));
+        console.log(data);        
       });
     }
     else {

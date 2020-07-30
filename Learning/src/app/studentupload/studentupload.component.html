@@ -48,7 +48,7 @@
                         <td>{{ s_upload.s_u_date}}</td>
                         <td *ngIf="loggedIn()"><a routerLink='edit_s_upload/{{s_upload._id}}'
                                 class="btn btn-primary">Edit</a></td>
-                        <td *ngIf="loggedIn()"><a (click)="deleteT_Upload(s_upload._id)" style="color:white"
+                        <td *ngIf="loggedIn()"><a (click)="deleteS_Upload(s_upload._id)" style="color:white"
                                 class="btn btn-primary">Delete</a></td>
                     </tr>
                 </tbody>

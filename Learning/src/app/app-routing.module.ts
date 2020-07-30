@@ -108,7 +108,7 @@ const routes: Routes = [
         component: StudentuploadComponent,
         children: [
           {
-            path: 'edit_s_upload/:s_u_id',
+            path: 'edit_s_upload/:_id',
             component: AddSUploadComponent
           }
         ]
@@ -172,7 +172,7 @@ const routes: Routes = [
         component: StudentuploadComponent,
         children: [
           {
-            path: 'edit_s_upload/:s_u_id',
+            path: 'edit_s_upload/:_id',
             component: AddSUploadComponent
           }
         ]
@@ -203,7 +203,7 @@ const routes: Routes = [
         component: StudentuploadComponent,
         children: [
           {
-            path: 'edit_s_upload/:s_u_id',
+            path: 'edit_s_upload/:_id',
             component: AddSUploadComponent
           }
         ]
