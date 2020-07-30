@@ -1,1 +1,56 @@
-<p>teacherupload works!</p>
+<router-outlet></router-outlet>
+<div class="card">
+    <div class="card-header row">
+        <h3 col-3>{{title}}</h3>
+        <form class="form flex-inline" #newFilTUpld="ngForm" >
+        <select name="s_fil_class" id="s_fil_class" [(ngModel)]="filter.classs"
+            class="form-control rounded-0 mx-3 d-inline" 
+            aria-placeholder="Select Class">
+            <option *ngFor="let dl of classlist" [value]="dl">{{dl}}</option>
+        </select>
+        <select name="s_div" id="s_div" [(ngModel)]="filter.subjects" 
+        class="form-control rounded-0 mx-3 d-inline"
+            aria-placeholder="Select Division">            
+            <option *ngFor="let dl of subjectlist" [value]="dl">{{dl}}</option>
+        </select>
+        <button (click)="filterlist()">Get Teacher Uploads</button>
+</form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Subjects</th>
+                        <th>Category</th>
+                        <th>Topic</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Upload</th>
+                        <th *ngIf="loggedIn()">Edit</th>
+                        <th *ngIf="loggedIn()">Edit</th>
+                        <th *ngIf="loggedIn()">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let t_upload of t_uploads'>
+                        <td>{{ t_upload.classs }}</td>
+                        <td>{{ t_upload.subjects }}</td>
+                        <td>{{ t_upload.category }}</td>
+                        <td>{{ t_upload.topic }}</td>
+                        <td>{{ t_upload.title }}</td>
+                        <td>{{ t_upload.description }}</td>
+                        <td>{{ t_upload.upload}}</td>
+                        <td *ngIf="loggedIn()"><a routerLink='../add_s_upload/{{t_upload._id}}'
+                            class="btn btn-primary">Add Answer</a></td>
+                        <td *ngIf="(loggedIn())&&(usertype!='student')"><a routerLink='edit_t_upload/{{t_upload._id}}'
+                                class="btn btn-primary">Edit</a></td>
+                        <td *ngIf="(loggedIn())&&(usertype!='student')"><a (click)="deleteT_Upload(t_upload._id)" style="color:white"
+                                class="btn btn-primary">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

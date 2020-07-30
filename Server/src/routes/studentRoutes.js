@@ -8,10 +8,33 @@ const StudentData = require('../model/studentData');
 studentRouter.get('/students', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-    StudentData.find()
+    StudentData.find().sort({"s_class":1})
         .then(function (students) {
             res.send(students);
         });
+});
+
+studentRouter.post('/filterstudents', function (req, res) {
+    // console.log("inside rout");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+    let filterData = req.body;
+    // console.log(filterData);
+    StudentData.find({ $and: [{ s_class: filterData.s_class }, { s_div: filterData.s_div }] }).sort({"s_name":1}).exec( (err, filterstudents) => {
+        if (err) {
+            // console.log("Error");
+            console.log(err);
+        } else {
+            // console.log("got Student");
+            console.log(filterstudents);
+            if (!filterstudents) {
+                res.status(401).send("No students to display");
+            }
+            else {
+                res.send(filterstudents);
+            }
+        }
+    });
 });
 
 studentRouter.get('/editstudent/:id', (req, res) => {
@@ -32,10 +55,10 @@ studentRouter.get('/deletestudent/:id', (req, res) => {
         .then(function (student) {
             // res.send(student);
             console.log(student);
-            StudentData.find()
+            StudentData.find().sort({"s_class":1})
                 .then(function (students) {
                     res.send(students);
-                });            
+                });
         });
 });
 

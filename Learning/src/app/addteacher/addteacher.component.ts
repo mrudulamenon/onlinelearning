@@ -33,7 +33,6 @@ export class AddteacherComponent implements OnInit {
 
   constructor(private a_route: ActivatedRoute, private _auth: AuthService, private teacherService: TeacherService, private _route: Router) {
     this._route.routeReuseStrategy.shouldReuseRoute = () => false;
-
   }
   // public t_classteacherof = [];
   t_classlist = [];
@@ -167,13 +166,14 @@ export class AddteacherComponent implements OnInit {
         }
       )
   }
-  AddTeacher(newStuForm) {
+  AddTeacher(newTcrForm) {
     console.log(this._id);
 
     if (this._id == null) {
 
       console.log(this.teacher);
       this.teacher.email = this.user.email;
+      console.log(this.user);
       this._auth.registerUser(this.user)
         .subscribe((data) => {
           this.user = JSON.parse(JSON.stringify(data));
@@ -191,7 +191,7 @@ export class AddteacherComponent implements OnInit {
               res => {
                 console.log(res);
                 alert("New teacher Added");
-                newStuForm.resetForm();
+                newTcrForm.resetForm();
                 // this._route.navigate(['/a_home/admins']);
                 if (this.usertype == 'admin') {
                   this._route.navigate(['/a_home/t_details']);
@@ -203,14 +203,14 @@ export class AddteacherComponent implements OnInit {
               err => {
                 console.log(err);
                 this.msg = err.error;
-                newStuForm.resetForm();
+                // newTcrForm.resetForm();
               }
             );
         },
           err => {
             console.log(err);
             this.msg = err.error;
-            newStuForm.resetForm();
+            newTcrForm.resetForm();
           }
         );
       console.log("called add");
@@ -235,7 +235,7 @@ export class AddteacherComponent implements OnInit {
               res => {
                 console.log(res);
                 alert("Teacher Details Updated");
-                newStuForm.resetForm();
+                newTcrForm.resetForm();
                 // this._route.navigate(['/a_home/admins']);
                 if (this.usertype == 'admin') {
                   this._route.navigate(['/a_home/t_details']);
@@ -247,14 +247,14 @@ export class AddteacherComponent implements OnInit {
               err => {
                 console.log(err);
                 this.msg = err.error;
-                newStuForm.resetForm();
+                newTcrForm.resetForm();
               }
             );
         },
           err => {
             console.log(err);
             this.msg = err.error;
-            newStuForm.resetForm();
+            newTcrForm.resetForm();
           }
         );
       console.log("called update");

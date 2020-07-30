@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const bodyparser = require('body-parser');
 const port = 3000;
 const path = require('path');
+const fileUpload = require('express-fileupload');
+
 const app = new express();
 const authRouter = require('./src/routes/authRoutes');
 const adminRouter = require('./src/routes/adminRoutes');
@@ -16,6 +18,7 @@ const { db } = require('./src/model/userData');
 
 app.use(cors());
 app.use(bodyparser.json());
+app.use(fileUpload());
 
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);

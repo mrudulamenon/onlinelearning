@@ -24,3 +24,6 @@
     padding: 5px;
     margin: 5px;
 }
+div{
+    transition: max-height 0.2s ease-out;
+}

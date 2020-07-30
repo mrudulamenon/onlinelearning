@@ -1,1 +1,134 @@
-<p>add-t-upload works!</p>
+<div class="py-5">
+    <div class="row">
+        <div class="col-md-6-lg-4-sm-10 mx-auto">
+            <div class="card">
+                <form class="form" #newTcrUpld="ngForm" (ngSubmit)="AddT_Upload(newTcrUpld)">
+                    <div class="card-header">
+                        <h3>{{title1}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>Fields marked <span class="text-danger">*</span> are mandatory</tr>
+                                    <tr class="text-danger">{{msg}}</tr>
+                                    <tr>
+                                        <td>
+                                            <label>Uploading Date</label>
+                                        </td>
+                                        <td>
+                                            <label for="date">{{t_upload.t_u_date | date: 'medium' }}</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Standard(Class)</label></td>
+                                        <td>
+                                            <select name="classs" id="classs" [(ngModel)]="t_upload.classs"
+                                                #classs="ngModel" [class.is-invalid]="classs.invalid && classs.touched"
+                                                class="form-control rounded-0">
+                                                <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                                <option *ngFor="let dl of classlist" [value]="dl">{{dl}}</option>
+                                            </select>
+                                            <small class="text-danger"
+                                                [class.d-none]="classs.valid || classs.untouched">Enter
+                                                the Class</small>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Subjects</label></td>
+                                        <td>
+                                            <ng-multiselect-dropdown [placeholder]="'Select Subjects'"
+                                                [data]="dropdownList1" [(ngModel)]="selectedItems1"
+                                                [settings]="dropdownSettings1" (onSelect)="onItemSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)" name="subjects" id="subjects"
+                                                [(ngModel)]="t_upload.subjects" #subjects="ngModel"
+                                                [class.is-invalid]="subjects.invalid && subjects.touched"
+                                                class="rounded-0">
+                                            </ng-multiselect-dropdown>
+                                            <small class="text-danger"
+                                                [class.d-none]="subjects.valid || subjects.untouched">Enter
+                                                Subjects</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Category</label></td>
+                                        <td>
+                                            <select name="category" id="category" [(ngModel)]="t_upload.category"
+                                                #category="ngModel"
+                                                [class.is-invalid]="category.invalid && category.touched"
+                                                class="form-control rounded-0">
+                                                <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                                <option *ngFor="let dl of categorylist" [value]="dl">{{dl}}</option>
+                                            </select>
+                                            <small class="text-danger"
+                                                [class.d-none]="category.valid || category.untouched">Enter
+                                                the Category</small>
+                                        </td>
+                                    </tr>
+
+                                    <!-- <tr>
+                                        <td><label>Category</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="category" [(ngModel)]="t_upload.category"
+                                                class="form-control rounded-0" #category="ngModel"
+                                                [class.is-invalid]="category.invalid && category.touched" required />
+                                            <small class="text-danger"
+                                                [class.d-none]="category.valid || category.untouched">Enter
+                                                a number</small>
+                                        </td>
+                                    </tr> -->
+
+                                    <tr>
+                                        <td><label>Topic</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="topic" [(ngModel)]="t_upload.topic"
+                                                class="form-control rounded-0" #topic="ngModel"
+                                                [class.is-invalid]="topic.invalid && topic.touched" required />
+                                            <small class="text-danger"
+                                                [class.d-none]="topic.valid || topic.untouched">Enter
+                                                a name</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Title</label><span class="text-danger">*</span></td>
+                                        <td><input type="text" name="title" [(ngModel)]="t_upload.title"
+                                                class="form-control rounded-0" #title="ngModel"
+                                                [class.is-invalid]="title.invalid && title.touched" required />
+                                            <small class="text-danger"
+                                                [class.d-none]="title.valid || title.untouched">Enter
+                                                a name</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Description</label></td>
+                                        <td><input type="text" name="description" [(ngModel)]="t_upload.description"
+                                                class="form-control rounded-0" #description="ngModel"
+                                                [class.is-invalid]="description.invalid && description.touched" />
+                                            <small class="text-danger"
+                                                [class.d-none]="description.valid || description.untouched">Enter
+                                                Address</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Upload Link</label></td>
+                                        <td><input type="text" name="upload" [(ngModel)]="t_upload.upload"
+                                                class="form-control rounded-0" #upload="ngModel"
+                                                [class.is-invalid]="upload.invalid && upload.touched" />
+                                            <small class="text-danger"
+                                                [class.d-none]="upload.valid || upload.untouched">Enter
+                                                Address</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="submit" [disabled]="newTcrUpld.form.invalid"
+                                                class="btn btn-primary" value="Submit" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

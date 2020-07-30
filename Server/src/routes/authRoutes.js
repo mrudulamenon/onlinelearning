@@ -33,7 +33,7 @@ authRouter.get('/validatepage', verifyToken, function (req, res) {
 authRouter.get('/adminusers', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-    UserData.find({ usertype: 'admin' }, (err, users) => {
+    UserData.find({ usertype: 'admin' }).sort({"email":1}).exec( (err, users) => {
         res.send(users);
     });
 });

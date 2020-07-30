@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6-lg-4-sm-10 mx-auto">
             <div class="card">
-                <form class="form" #newStu="ngForm" (ngSubmit)="AddTeacher(newStu)">
+                <form class="form" #newTcr="ngForm" (ngSubmit)="AddTeacher(newTcr)">
                     <div class="card-header">
                         <h3>{{title}}</h3>
                     </div>
@@ -11,6 +11,8 @@
                             <table class="table">
                                 <tbody>
                                     <tr>Fields marked <span class="text-danger">*</span> are mandatory</tr>
+                                    <tr class="text-danger">{{msg}}</tr>
+
                                     <tr>
                                         <td><label>Teacher Id</label><span class="text-danger">*</span></td>
                                         <td><input type="text" name="t_id" [(ngModel)]="teacher.t_id"
@@ -27,7 +29,7 @@
                                         <td><input type="text" name="t_desig" [(ngModel)]="teacher.t_desig"
                                                 class="form-control rounded-0" #t_desig="ngModel"
                                                 [class.is-invalid]="t_desig.invalid && t_desig.touched"
-                                                pattern="^[0-9]+$" required />
+                                                required />
                                             <small class="text-danger"
                                                 [class.d-none]="t_desig.valid || t_desig.untouched">Enter
                                                 a number</small>
@@ -46,7 +48,8 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label name="email" for="uname1">E-mail</label><br/><small>Use E-mail and password for signing in</small>
+                                            <label name="email" for="uname1">E-mail</label><span class="text-danger">*</span>
+                                            <br/><small>Use E-mail and password for signing in</small>
                                         </td>
                                         <td>
                                             <input name="email" type="text" [(ngModel)]="user.email" #email="ngModel"
@@ -58,7 +61,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label>Password</label>
+                                            <label>Password</label><span class="text-danger">*</span>
                                         </td>
                                         <td>
                                             <input name="password" type="password" [(ngModel)]="user.password"
@@ -69,10 +72,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><label>Address</label><span class="text-danger">*</span></td>
+                                        <td><label>Address</label></td>
                                         <td><input type="text" name="t_address" [(ngModel)]="teacher.t_address"
                                                 class="form-control rounded-0" #t_address="ngModel"
-                                                [class.is-invalid]="t_address.invalid && t_address.touched" required />
+                                                [class.is-invalid]="t_address.invalid && t_address.touched"/>
                                             <small class="text-danger"
                                                 [class.d-none]="t_address.valid || t_address.untouched">Enter
                                                 Address</small>
@@ -130,7 +133,7 @@
                                         </ng-multiselect-dropdown>
 
                                             <small class="text-danger"
-                                                [class.d-none]="t_classteacherof.valid || t_classteacherof.untouched">Enter
+                                                [class.d-none]="t_classes.valid || t_classes.untouched">Enter
                                                 the Class</small>
                                         </td>
                                     </tr>
@@ -152,7 +155,7 @@
 
                                     <tr>
                                         <td></td>
-                                        <td><input type="submit" [disabled]="newStu.form.invalid"
+                                        <td><input type="submit" [disabled]="newTcr.form.invalid"
                                                 class="btn btn-primary" value="Submit" /></td>
                                     </tr>
                                 </tbody>

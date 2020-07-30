@@ -36,7 +36,9 @@ export class AddAdminComponent implements OnInit {
     this.MyValue = true;
     this.edit_id="";
   }
-
+Hide(){
+  this.MyValue=false;
+}
   submitUser(userform: NgForm) {
     if (this.edit_id == "") {
       this._auth.registerUser(this.user)

@@ -1,7 +1,20 @@
 <router-outlet></router-outlet>
 <div class="card">
-    <div class="card-header">
-        <h3>{{title}}</h3>
+    <div class="card-header row">
+        <h3 col-3>{{title}}</h3>
+        <form class="form flex-inline" #newFilStu="ngForm" >
+        <select name="s_fil_class" id="s_fil_class" [(ngModel)]="filter.s_class"
+            class="form-control rounded-0 mx-3 d-inline" 
+            aria-placeholder="Select Class">
+            <option *ngFor="let dl of classlist" [value]="dl">{{dl}}</option>
+        </select>
+        <select name="s_div" id="s_div" [(ngModel)]="filter.s_div" 
+        class="form-control rounded-0 mx-3 d-inline"
+            aria-placeholder="Select Division">            
+            <option *ngFor="let dl of s_divs" [value]="dl">{{dl}}</option>
+        </select>
+        <button (click)="filterlist()">Get Students</button>
+</form>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -18,7 +31,7 @@
                         <th>Division</th>
                         <th *ngIf="loggedIn()">Edit</th>
                         <th *ngIf="loggedIn()">Delete</th>
-                    </tr>                    
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let student of students'>
@@ -30,8 +43,10 @@
                         <td>{{ student.s_phone }}</td>
                         <td>{{ student.s_class}}</td>
                         <td>{{ student.s_div}}</td>
-                        <td *ngIf="loggedIn()" ><a routerLink='edit_student/{{student._id}}' class="btn btn-primary">Edit</a></td>
-                        <td *ngIf="loggedIn()" ><a (click)="deleteStudent(student._id)" style="color:white" class="btn btn-primary">Delete</a></td>
+                        <td *ngIf="loggedIn()"><a routerLink='edit_student/{{student._id}}'
+                                class="btn btn-primary">Edit</a></td>
+                        <td *ngIf="loggedIn()"><a (click)="deleteStudent(student._id)" style="color:white"
+                                class="btn btn-primary">Delete</a></td>
                     </tr>
                 </tbody>
             </table>

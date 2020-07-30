@@ -3,7 +3,6 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
@@ -34,10 +33,13 @@ export class SubjectsComponent implements OnInit {
     // });
   }
   addSubject() {
-    // this.subject = { subject: "" };
+    this.subjects = { subject: "" };
     this.MyValue = true;
   }
+  Hide(){
+    this.MyValue = false;
 
+  }
   submitSubject(subjectform: NgForm) {
     console.log(this.newsubject);
     
@@ -66,6 +68,8 @@ export class SubjectsComponent implements OnInit {
         );
     }
     else {
+      console.log(this.newsubject);
+      
       this._auth.updateSubject(this.newsubject)
         .subscribe(
           res => {
@@ -86,9 +90,10 @@ export class SubjectsComponent implements OnInit {
     }
   }
 
-  editSubject() {
-    let id = localStorage.getItem("SubjectId");
+  editSubject(id) {
+    // let id = localStorage.getItem("SubjectId");
     this.MyValue = true;
+    this.edit_id = id;
     this._auth.editSubject(id)
       .subscribe((data) => {
         this.newsubject = JSON.parse(JSON.stringify(data));

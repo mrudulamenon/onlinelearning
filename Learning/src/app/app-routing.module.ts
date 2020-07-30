@@ -47,7 +47,13 @@ const routes: Routes = [
       },
       {
         path:'t_details',
-        component:TeacherdetailsComponent
+        component:TeacherdetailsComponent,
+        children:[
+          {
+            path:'edit_teacher/:_id',
+            component:AddteacherComponent
+          }    
+        ]
       },
       {
         path:'add_teacher',
@@ -77,28 +83,38 @@ const routes: Routes = [
       },
       {
         path:'t_upload',
-        component:TeacheruploadComponent
+        component:TeacheruploadComponent,
+        children:[
+          {
+            path:'edit_t_upload/:_id',
+            component:AddTUploadComponent
+          },
+          {
+            path:'add_s_upload/:t_u_id',
+            component:AddSUploadComponent
+          }
+        ]
+      },
+      {
+        path:'add_s_upload/:t_u_id',
+        component:AddSUploadComponent
       },
       {
         path:'add_t_upload',
         component:AddTUploadComponent
       },
-      {
-        path:'edit_t_upload/:email',
-        component:AddTUploadComponent
-      },
+      
       {
         path:'s_upload',
-        component:StudentuploadComponent
-      },
-      {
-        path:'add_s_upload',
-        component:StudentuploadComponent
-      },
-      {
-        path:'edit_s_upload/:s_u_id',
-        component:AddSUploadComponent
+        component:StudentuploadComponent,
+        children:[
+          {
+            path:'edit_s_upload/:s_u_id',
+            component:AddSUploadComponent
+          }
+        ]
       }
+            
     ]
   },
   {

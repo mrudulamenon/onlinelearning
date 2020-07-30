@@ -24,7 +24,7 @@ export class ClassesComponent implements OnInit {
   msg = "";
   MyValue = false;
 
-  constructor(private _auth: AuthService, private _route: Router) { }
+constructor(private _auth: AuthService, private _route: Router) { }
 public sections=["Lower Primary","Upper Primary", "Secondary","Higher Secondary"];
 public subjects=[];
 

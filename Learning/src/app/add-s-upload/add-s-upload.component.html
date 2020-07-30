@@ -1,1 +1,67 @@
-<p>add-s-upload works!</p>
+<div class="py-5">
+    <div class="row">
+        <div class="col-md-6-lg-4-sm-10 mx-auto">
+            <div class="card">
+                <form class="form" #newStuUpld="ngForm" (ngSubmit)="AddS_Upload(newStuUpld)">
+                    <div class="card-header">
+                        <h3>{{title1}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>Fields marked <span class="text-danger">*</span> are mandatory</tr>
+                                    <tr class="text-danger">{{msg}}</tr>
+                                    <tr>
+                                        <td>
+                                            <label>Uploading Date</label>
+                                        </td>
+                                        <td>
+                                            <label for="date">{{s_upload.s_u_date | date: 'medium'}}</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Description</label></td>
+                                        <td><input type="text" name="description" [(ngModel)]="s_upload.description"
+                                                class="form-control rounded-0" #description="ngModel"
+                                                [class.is-invalid]="description.invalid && description.touched" />
+                                            <small class="text-danger"
+                                                [class.d-none]="description.valid || description.untouched">Enter
+                                                Description</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Upload Link</label></td>
+                                        <td><input type="text" name="upload" [(ngModel)]="s_upload.upload"
+                                                class="form-control rounded-0" #upload="ngModel"
+                                                [class.is-invalid]="upload.invalid && upload.touched" />
+                                            <small class="text-danger"
+                                                [class.d-none]="upload.valid || upload.untouched">Enter
+                                                Address</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Teacher Comment</label></td>
+                                        <td><input type="text" name="t_comment" [(ngModel)]="s_upload.t_comment"
+                                                class="form-control rounded-0" #t_comment="ngModel"
+                                                [disabled]="IfStudent()"
+                                                [class.is-invalid]="t_comment.invalid && t_comment.touched" />
+                                            <small class="text-danger"
+                                                [class.d-none]="t_comment.valid || t_comment.untouched">Enter
+                                                Comment</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="submit" [disabled]="newStuUpld.form.invalid"
+                                                class="btn btn-primary" value="Submit" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

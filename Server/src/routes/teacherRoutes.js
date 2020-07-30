@@ -8,7 +8,7 @@ const TeacherData = require('../model/teacherData');
 teacherRouter.get('/teachers', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-    TeacherData.find()
+    TeacherData.find().sort({"email":1})
         .then(function (teachers) {
             res.send(teachers);
         });
@@ -32,7 +32,7 @@ teacherRouter.get('/deleteteacher/:id', (req, res) => {
         .then(function (teacher) {
             // res.send(teacher);
             console.log(teacher);
-            TeacherData.find()
+            TeacherData.find().sort({"t_name":1})
                 .then(function (teachers) {
                     res.send(teachers);
                 });            
@@ -69,7 +69,7 @@ teacherRouter.post('/addteacher', (req, res) => {
                 });
             }
             else {
-                res.status(401).send("Teacher already added");
+                res.status(401).send("Teacher with same teacherId already added");
             }
         }
     });

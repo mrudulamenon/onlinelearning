@@ -1,1 +1,48 @@
-<p>teacherdetails works!</p>
+<router-outlet></router-outlet>
+<div class="card">
+    <div class="card-header">
+        <h3>{{title}}</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Teacher Id</th>
+                        <th>Designation</th>
+                        <th>Teacher Name</th>
+                        <th>E-mail</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Class Teacher Of</th>
+                        <th>Division</th>
+                        <th>Subjects</th>
+                        <th>Classes</th>
+                        <th *ngIf="loggedIn()">Edit</th>
+                        <th *ngIf="loggedIn()">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let teacher of teachers'>
+                        <td>{{ teacher.t_id }}</td>
+                        <td>{{ teacher.t_desig }}</td>
+                        <td>{{ teacher.t_name }}</td>
+                        <td>{{ teacher.email }}</td>
+                        <td>{{ teacher.t_address }}</td>
+                        <td>{{ teacher.t_phone }}</td>
+                        <td>{{ teacher.t_classteacherof}}</td>
+                        <td>{{ teacher.t_div}}</td>
+                        <td>{{ teacher.t_subjects}}</td>
+                        <td>{{ teacher.t_classes}}</td>
+                        <td *ngIf="loggedIn()"><a routerLink='edit_teacher/{{teacher._id}}'
+                                class="btn btn-primary">Edit</a>
+                        </td>
+                        <td *ngIf="loggedIn()"><a (click)="deleteTeacher(teacher._id)" style="color:white"
+                                class="btn btn-primary">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

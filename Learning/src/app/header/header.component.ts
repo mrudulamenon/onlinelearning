@@ -9,15 +9,33 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _auth: AuthService,private router:Router) { }
+  constructor(private _auth: AuthService, private router: Router) { }
   title: String = 'Online Learning';
   ngOnInit(): void {
   }
-  loggedIn(){
+  homeRedirect() {
+    if (localStorage.getItem('type')) {
+      let type = localStorage.getItem('type');
+      if (type == 'admin') {
+        this.router.navigate(['/a_home']);
+      }
+      else if (type == 'teacher') {
+        this.router.navigate(['/t_home']);
+      }
+      else if (type == 'student') {
+        this.router.navigate(['/s_home']);
+      }
+    }
+    else {
+      this.router.navigate(['/']);
+
+    }
+  }
+  loggedIn() {
     // return false;
     return this._auth.loggedIn();
   }
-  logoutUser(){
+  logoutUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('type');
     localStorage.removeItem('userId');
