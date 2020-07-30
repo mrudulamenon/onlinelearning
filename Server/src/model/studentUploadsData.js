@@ -3,6 +3,8 @@ mongoose.connect('mongodb://localhost:27017/LearningDb');
 const Schema = mongoose.Schema;
 var StudentUploadSchema = new Schema({
     t_upload_id: String,
+    s_u_class:String,
+    s_u_div:String,
     user_id: String,
     description: String,
     upload: String,

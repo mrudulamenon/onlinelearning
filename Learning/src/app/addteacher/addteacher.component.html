@@ -25,17 +25,15 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><label>Designation</label><span class="text-danger">*</span></td>
+                                        <td><label>Designation</label></td>
                                         <td><input type="text" name="t_desig" [(ngModel)]="teacher.t_desig"
                                                 class="form-control rounded-0" #t_desig="ngModel"
-                                                [class.is-invalid]="t_desig.invalid && t_desig.touched"
-                                                required />
+                                                [class.is-invalid]="t_desig.invalid && t_desig.touched" />
                                             <small class="text-danger"
                                                 [class.d-none]="t_desig.valid || t_desig.untouched">Enter
-                                                a number</small>
+                                                Designation</small>
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td><label>Teacher Name</label><span class="text-danger">*</span></td>
                                         <td><input type="text" name="t_name" [(ngModel)]="teacher.t_name"
@@ -48,14 +46,17 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label name="email" for="uname1">E-mail</label><span class="text-danger">*</span>
-                                            <br/><small>Use E-mail and password for signing in</small>
+                                            <label name="email" for="email">E-mail</label><span
+                                                class="text-danger">*</span>
+                                            <br /><small>Use E-mail and password for signing in</small>
                                         </td>
                                         <td>
                                             <input name="email" type="text" [(ngModel)]="user.email" #email="ngModel"
-                                                [class.is-invalid]="email.invalid && email.touched" class="form-control rounded-0"
+                                                [class.is-invalid]="email.invalid && email.touched"
+                                                class="form-control rounded-0"
                                                 pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                                            <small class="text-danger" [class.d-none]="email.valid || email.untouched">Enter a valid
+                                            <small class="text-danger"
+                                                [class.d-none]="email.valid || email.untouched">Enter a valid
                                                 E-mail</small>
                                         </td>
                                     </tr>
@@ -65,17 +66,19 @@
                                         </td>
                                         <td>
                                             <input name="password" type="password" [(ngModel)]="user.password"
-                                            #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
-                                            class="form-control rounded-0" minlength="6" required>
-                                        <small class="text-danger" [class.d-none]="password.valid || password.untouched">Enter a
-                                            valid Password(Minimum Length - 6)</small>
+                                                #password="ngModel"
+                                                [class.is-invalid]="password.invalid && password.touched"
+                                                class="form-control rounded-0" minlength="6" required>
+                                            <small class="text-danger"
+                                                [class.d-none]="password.valid || password.untouched">Enter a
+                                                valid Password(Minimum Length - 6)</small>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label>Address</label></td>
                                         <td><input type="text" name="t_address" [(ngModel)]="teacher.t_address"
                                                 class="form-control rounded-0" #t_address="ngModel"
-                                                [class.is-invalid]="t_address.invalid && t_address.touched"/>
+                                                [class.is-invalid]="t_address.invalid && t_address.touched" />
                                             <small class="text-danger"
                                                 [class.d-none]="t_address.valid || t_address.untouched">Enter
                                                 Address</small>
@@ -84,23 +87,23 @@
                                     <tr>
                                         <td><label>Phone</label></td>
                                         <td><input type="text" name="t_phone" [(ngModel)]="teacher.t_phone"
-                                                class="form-control rounded-0" #t_phone="ngModel"
+                                                class="form-control rounded-0" #t_phone="ngModel" minlength="10"
                                                 [class.is-invalid]="t_phone.invalid && t_phone.touched" />
                                             <small class="text-danger"
                                                 [class.d-none]="t_phone.valid || t_phone.untouched">Enter
-                                                a description</small>
+                                                a Phone Number</small>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label>Standard(Class Teacher Of)</label></td>
-                                        <td>                
-                                            <select name="t_classteacherof" id="t_classteacherof" [(ngModel)]="teacher.t_classteacherof"
-                                            #t_classteacherof="ngModel"
-                                            [class.is-invalid]="t_classteacherof.invalid && t_classteacherof.touched"
-                                            class="form-control rounded-0">
-                                            <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
-                                            <option *ngFor="let dl of t_classlist" [value]="dl">{{dl}}</option>
-                                        </select>
+                                        <td>
+                                            <select name="t_classteacherof" id="t_classteacherof"
+                                                [(ngModel)]="teacher.t_classteacherof" #t_classteacherof="ngModel"
+                                                [class.is-invalid]="t_classteacherof.invalid && t_classteacherof.touched"
+                                                class="form-control rounded-0">
+                                                <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                                <option *ngFor="let dl of t_classlist" [value]="dl">{{dl}}</option>
+                                            </select>
                                             <small class="text-danger"
                                                 [class.d-none]="t_classteacherof.valid || t_classteacherof.untouched">Enter
                                                 the Class</small>
@@ -109,13 +112,12 @@
                                     <tr>
                                         <td><label>Division</label></td>
                                         <td>
-                                            <select name="t_div" id="t_div" [(ngModel)]="teacher.t_div"
-                                            #t_div="ngModel"
-                                            [class.is-invalid]="t_div.invalid && t_div.touched"
-                                            class="form-control rounded-0">
-                                            <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
-                                            <option *ngFor="let dl of t_divs" [value]="dl">{{dl}}</option>
-                                        </select>
+                                            <select name="t_div" id="t_div" [(ngModel)]="teacher.t_div" #t_div="ngModel"
+                                                [class.is-invalid]="t_div.invalid && t_div.touched"
+                                                class="form-control rounded-0">
+                                                <!-- ng-options="x for x in sections" ng-repeat="x in sections"-->
+                                                <option *ngFor="let dl of t_divs" [value]="dl">{{dl}}</option>
+                                            </select>
                                             <small class="text-danger"
                                                 [class.d-none]="t_div.valid || t_div.untouched">Enter the
                                                 division</small>
@@ -123,14 +125,15 @@
                                     </tr>
                                     <tr>
                                         <td><label>Classes</label></td>
-                                        <td>                
+                                        <td>
                                             <ng-multiselect-dropdown [placeholder]="'Select Classes'"
-                                            [data]="dropdownList1" [(ngModel)]="selectedItems1"
-                                            [settings]="dropdownSettings1" (onSelect)="onItemSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)" name="t_classes" id="t_classes" [(ngModel)]="teacher.t_classes"
-                                            #t_classes="ngModel" [class.is-invalid]="t_classes.invalid && t_classes.touched" class="rounded-0"
-                                            >
-                                        </ng-multiselect-dropdown>
+                                                [data]="dropdownList1" [(ngModel)]="selectedItems1"
+                                                [settings]="dropdownSettings1" (onSelect)="onItemSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)" name="t_classes" id="t_classes"
+                                                [(ngModel)]="teacher.t_classes" #t_classes="ngModel"
+                                                [class.is-invalid]="t_classes.invalid && t_classes.touched"
+                                                class="rounded-0">
+                                            </ng-multiselect-dropdown>
 
                                             <small class="text-danger"
                                                 [class.d-none]="t_classes.valid || t_classes.untouched">Enter
@@ -139,18 +142,19 @@
                                     </tr>
                                     <tr>
                                         <td><label>Subjects</label></td>
-                                        <td>                
+                                        <td>
                                             <ng-multiselect-dropdown [placeholder]="'Select Subjects'"
-                                            [data]="dropdownList2" [(ngModel)]="selectedItems2"
-                                            [settings]="dropdownSettings2" (onSelect)="onItemSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)" name="t_subjects" id="t_subjects" [(ngModel)]="teacher.t_subjects"
-                                            #t_subjects="ngModel" [class.is-invalid]="t_subjects.invalid && t_subjects.touched" class="rounded-0"
-                                            >
-                                        </ng-multiselect-dropdown>
-                                        <small class="text-danger"
-                                        [class.d-none]="t_subjects.valid || t_subjects.untouched">Enter 
-                                        Subjects</small>
-                                </td>
+                                                [data]="dropdownList2" [(ngModel)]="selectedItems2"
+                                                [settings]="dropdownSettings2" (onSelect)="onItemSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)" name="t_subjects" id="t_subjects"
+                                                [(ngModel)]="teacher.t_subjects" #t_subjects="ngModel"
+                                                [class.is-invalid]="t_subjects.invalid && t_subjects.touched"
+                                                class="rounded-0">
+                                            </ng-multiselect-dropdown>
+                                            <small class="text-danger"
+                                                [class.d-none]="t_subjects.valid || t_subjects.untouched">Enter
+                                                Subjects</small>
+                                        </td>
                                     </tr>
 
                                     <tr>

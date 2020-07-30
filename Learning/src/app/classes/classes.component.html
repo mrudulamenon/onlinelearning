@@ -3,19 +3,17 @@
         <h3>{{title}}</h3>
     </div>
     <div class="card-body">
-        <button (click)="addClass()" class="btn btn-info" type="button" data-toggle="collapse"
-                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">New Class</button>
+        <!-- <button (click)="addClass()" class="btn btn-info" type="button" data-toggle="collapse"
+                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">New Class</button> -->
 
-            <!-- <button (click)="editClass()" class="btn btn-info mx-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Edit Profile</button> -->
-            <!-- <button (click)="addClass()" class="btn btn-info" type="button">New Class</button>
-            
-            <button (click)="editClass()" class="btn btn-info mx-3" type="button">Edit Profile</button> -->
+            <button (click)="addClass()" class="btn btn-info" type="button">New Class</button>
+            <button *ngIf="MyValue" (click)="Hide()" class="btn btn-info mx-3" type="button">Hide</button>
             
         <div>
             <div class="mx-4">
             <label class="text-danger">{{msg}}</label>
-            <div class="collapse" id="collapseExample">
-                <!-- <div ng-show="MyValue"> -->
+            <!-- <div class="collapse" id="collapseExample"> -->
+                <div *ngIf="MyValue">
                 <div class="py-5">
                     <div class="row">
                         <div class="mx-auto">
@@ -23,7 +21,7 @@
                             <!-- form card register  -->
                             <div class="card rounder-0">
                                 <div class="card-header">
-                                    <h3 class="mb-0" *ngIf="edit_id==''">Register</h3>
+                                    <h3 class="mb-0" *ngIf="edit_id==''">Add New Class</h3>
                                     <h3 class="mb-0" *ngIf="edit_id!=''">Edit</h3>
 
                                 </div>
@@ -34,7 +32,7 @@
                                             <label name="classs" for="classs">{{newclass.classs}}</label>
                                             <input name="classs" type="text" [(ngModel)]="newclass.classs"
                                                 #classs="ngModel" [class.is-invalid]="classs.invalid && classs.touched"
-                                                class="form-control rounded-0" required>
+                                                class="form-control rounded-0" required autofocus>
                                             <small class="text-danger"
                                                 [class.d-none]="classs.valid || classs.untouched">Enter a Class</small>
                                         </div>

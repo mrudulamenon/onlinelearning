@@ -69,6 +69,7 @@ export class AddstudentComponent implements OnInit {
         this.if_id = params['_id'];
       }))){
         this._id=this.if_id;
+        this.title = "Edit Student"
       console.log("id" + this._id);
       this.studentService.editStudent(this._id).subscribe((data) => {
         this.student = JSON.parse(JSON.stringify(data));

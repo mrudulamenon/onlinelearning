@@ -24,20 +24,20 @@ teacherUploadsRouter.post('/filtert_uploads', function (req, res) {
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
     let filterData = req.body;
     console.log(filterData);
-    TeacherUploadsData.find({ classs: filterData.classs }, (err, filtert_uploads) => {
-        // if (err) {
-        //     console.log("Error");
-        //     console.log(err);
-        // } else {
-        //     console.log("got Teacher Upload");
-        //     console.log(filtert_uploads);
-        //     if (!filtert_uploads) {
-        //         res.status(401).send("No Teacher Upload to display");
-        //     }
-        //     else {
+    TeacherUploadsData.find({ $and: [{ classs: filterData.classs }, { subjects: filterData.subjects }] }, (err, filtert_uploads) => {
+        if (err) {
+            console.log("Error");
+            console.log(err);
+        } else {
+            console.log("got Teacher Upload");
+            console.log(filtert_uploads);
+            if (!filtert_uploads) {
+                res.status(401).send("No Teacher Upload to display");
+            }
+            else {
                 res.send(filtert_uploads);
-        //     }
-        // }
+            }
+        }
     });
 });
 

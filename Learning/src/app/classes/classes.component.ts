@@ -42,6 +42,10 @@ public subjects=[];
       allowSearchFilter: true
     };
   }
+  Hide(){
+    this.MyValue=false;
+  }
+  
   getSubjects(){
     return this._auth.getSubjects()
     .subscribe(

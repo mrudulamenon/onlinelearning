@@ -8,7 +8,7 @@ const StudentData = require('../model/studentData');
 studentRouter.get('/students', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-    StudentData.find().sort({"s_class":1})
+    StudentData.find().sort({ "s_class": 1 })
         .then(function (students) {
             res.send(students);
         });
@@ -20,7 +20,7 @@ studentRouter.post('/filterstudents', function (req, res) {
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
     let filterData = req.body;
     // console.log(filterData);
-    StudentData.find({ $and: [{ s_class: filterData.s_class }, { s_div: filterData.s_div }] }).sort({"s_name":1}).exec( (err, filterstudents) => {
+    StudentData.find({ $and: [{ s_class: filterData.s_class }, { s_div: filterData.s_div }] }).sort({ "s_name": 1 }).exec((err, filterstudents) => {
         if (err) {
             // console.log("Error");
             console.log(err);
@@ -37,6 +37,19 @@ studentRouter.post('/filterstudents', function (req, res) {
     });
 });
 
+studentRouter.get('/getstudent/:user_id', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+    const user_id = req.params.user_id;
+    console.log("getid");
+    console.log(user_id);
+    StudentData.findOne({ user_id: user_id })
+        .then(function (student) {
+            console.log("stud got");
+            console.log(student);
+            res.send(student);
+        });
+});
 studentRouter.get('/editstudent/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
@@ -50,12 +63,13 @@ studentRouter.get('/editstudent/:id', (req, res) => {
 studentRouter.get('/deletestudent/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+
     const id = req.params.id;
     StudentData.findOneAndDelete({ _id: id })
         .then(function (student) {
             // res.send(student);
             console.log(student);
-            StudentData.find().sort({"s_class":1})
+            StudentData.find().sort({ "s_class": 1 })
                 .then(function (students) {
                     res.send(students);
                 });

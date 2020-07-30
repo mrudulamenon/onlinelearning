@@ -53,8 +53,9 @@ studentUploadsRouter.get('/edits_upload/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
     const id = req.params.id;
+    console.log(id);
     StudentUploadsData.findOne({ _id: id })
-        .then(function (s_upload) {
+        .then(function(s_upload) {
             res.send(s_upload);
         });
 });

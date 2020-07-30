@@ -17,24 +17,24 @@
                                             <label>Uploading Date</label>
                                         </td>
                                         <td>
-                                            <label for="date">{{s_upload.s_u_date | date: 'medium'}}</label>
+                                            <label for="date" name="s_u_date" [(ngModel)]="s_upload.s_u_date">{{s_upload.s_u_date | date: 'medium'}}</label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><label>Description</label></td>
+                                        <td><label>Description</label><span class="text-danger">*</span></td>
                                         <td><input type="text" name="description" [(ngModel)]="s_upload.description"
                                                 class="form-control rounded-0" #description="ngModel"
-                                                [class.is-invalid]="description.invalid && description.touched" />
+                                                [class.is-invalid]="description.invalid && description.touched" required/>
                                             <small class="text-danger"
                                                 [class.d-none]="description.valid || description.untouched">Enter
                                                 Description</small>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><label>Upload Link</label></td>
+                                        <td><label>Upload Link</label><span class="text-danger">*</span></td>
                                         <td><input type="text" name="upload" [(ngModel)]="s_upload.upload"
                                                 class="form-control rounded-0" #upload="ngModel"
-                                                [class.is-invalid]="upload.invalid && upload.touched" />
+                                                [class.is-invalid]="upload.invalid && upload.touched" required />
                                             <small class="text-danger"
                                                 [class.d-none]="upload.valid || upload.untouched">Enter
                                                 Address</small>

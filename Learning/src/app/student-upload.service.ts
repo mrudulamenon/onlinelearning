@@ -12,12 +12,10 @@ export class StudentUploadService {
     return this.http.get("http://localhost:3000/studentuploads/s_uploads");
   }
   getFilterS_Uploads(filter){
-    console.log("Service");
-    console.log(filter);   
-    
-    return this.http.post("http://localhost:3000/student/filters_uploads",filter);
-  }
-  
+    // console.log("Service");
+    // console.log(filter);       
+    return this.http.post("http://localhost:3000/studentuploads/filters_uploads",filter);
+  }  
   addS_Upload(studentupload){
     return this.http.post("http://localhost:3000/studentuploads/adds_upload", studentupload);
   }  

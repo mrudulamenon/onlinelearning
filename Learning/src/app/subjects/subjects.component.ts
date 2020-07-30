@@ -33,11 +33,12 @@ export class SubjectsComponent implements OnInit {
     // });
   }
   addSubject() {
-    this.subjects = { subject: "" };
+    this.edit_id="";
+    this.newsubject = { subject: "" };
     this.MyValue = true;
   }
   Hide(){
-    this.MyValue = false;
+        this.MyValue = false;
 
   }
   submitSubject(subjectform: NgForm) {

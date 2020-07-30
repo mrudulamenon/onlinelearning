@@ -12,10 +12,9 @@ export class TeacherUploadService {
     return this.http.get("http://localhost:3000/teacheruploads/t_uploads");
   }
   getFilterT_Uploads(filter){
-    console.log("Service");
-    console.log(filter);   
-    
-    return this.http.post("http://localhost:3000/student/filtert_uploads",filter);
+    // console.log("Service");
+    // console.log(filter);       
+    return this.http.post("http://localhost:3000/teacheruploads/filtert_uploads",filter);
   }
   
   addT_Upload(teacherupload){

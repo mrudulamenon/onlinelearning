@@ -11,7 +11,7 @@ const SubjectData = require('../model/subjectData');
 adminRouter.get('/subjects', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-    SubjectData.find()
+    SubjectData.find().sort({"subject":1})
         .then(function (subjects) {
             res.send(subjects);
         });
@@ -101,7 +101,7 @@ adminRouter.post('/updatesubject', (req, res) => {
 adminRouter.get('/classes', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
-    ClassData.find()
+    ClassData.find().sort({"classs":1})
         .then(function (classes) {
             res.send(classes);
         });
@@ -147,10 +147,6 @@ adminRouter.post('/addclasss', (req, res) => {
                     }
                     else {
                         res.send({ addedClass });
-                        // let payload = { classs: classs._id }
-                        // let token = jwt.sign(payload, 'secretKey')
-                        // res.status(200).send({ token })
-                        // res.status(200).send(addedClass);
                     }
                 });
             }

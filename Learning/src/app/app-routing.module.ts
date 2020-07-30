@@ -20,167 +20,200 @@ import { AddSUploadComponent } from './add-s-upload/add-s-upload.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:HomeComponent,
-    children:[
+    path: '',
+    component: HomeComponent,
+    children: [
       {
-        path:'login/:type',
-        component:LoginComponent
+        path: 'login/:type',
+        component: LoginComponent
       }
     ]
   },
+  // {
+  //   path:'login',
+  //   component:LoginComponent
+  // },
+  // {
+  //   path:'register',
+  //   component:AddteacherComponent
+  // },
   {
-    path:'login',
-    component:LoginComponent
-  },
-  {
-    path:'register',
-    component:AddteacherComponent
-  },
-  {
-    path:'a_home',
-    component:AdminhomeComponent,
-    children:[
+    path: 'a_home',
+    component: AdminhomeComponent,
+    children: [
       {
-        path:'admins',
-        component:AddAdminComponent
+        path: 'admins',
+        component: AddAdminComponent
       },
       {
-        path:'t_details',
-        component:TeacherdetailsComponent,
-        children:[
+        path: 'subjects',
+        component: SubjectsComponent
+      },
+      {
+        path: 'class',
+        component: ClassesComponent
+      },
+      {
+        path: 't_details',
+        component: TeacherdetailsComponent,
+        children: [
           {
-            path:'edit_teacher/:_id',
-            component:AddteacherComponent
-          }    
-        ]
-      },
-      {
-        path:'add_teacher',
-        component:AddteacherComponent
-      },
-      {
-        path:'s_details',
-        component:StudentdetailsComponent,
-        children:[
-          {
-            path:'edit_student/:_id',
-            component:AddstudentComponent
-          }    
-        ]
-      },
-      {
-        path:'add_student',
-        component:AddstudentComponent
-      },
-      {
-        path:'subjects',
-        component:SubjectsComponent
-      },
-      {
-        path:'class',
-        component:ClassesComponent
-      },
-      {
-        path:'t_upload',
-        component:TeacheruploadComponent,
-        children:[
-          {
-            path:'edit_t_upload/:_id',
-            component:AddTUploadComponent
-          },
-          {
-            path:'add_s_upload/:t_u_id',
-            component:AddSUploadComponent
+            path: 'edit_teacher/:_id',
+            component: AddteacherComponent
           }
         ]
       },
       {
-        path:'add_s_upload/:t_u_id',
-        component:AddSUploadComponent
+        path: 'add_teacher',
+        component: AddteacherComponent
       },
       {
-        path:'add_t_upload',
-        component:AddTUploadComponent
+        path: 's_details',
+        component: StudentdetailsComponent,
+        children: [
+          {
+            path: 'edit_student/:_id',
+            component: AddstudentComponent
+          }
+        ]
+      },
+      {
+        path: 'add_student',
+        component: AddstudentComponent
+      },
+      {
+        path: 'add_t_upload',
+        component: AddTUploadComponent
+      },
+      {
+        path: 't_upload',
+        component: TeacheruploadComponent,
+        children: [
+          {
+            path: 'edit_t_upload/:_id',
+            component: AddTUploadComponent
+          },
+          // {
+          //   path: 'add_s_upload/:t_u_id',
+          //   component: AddSUploadComponent
+          // }
+        ]
+      },
+      {
+        path: 'add_s_upload/:t_u_id',
+        component: AddSUploadComponent
+      },
+      {
+        path: 's_upload',
+        component: StudentuploadComponent,
+        children: [
+          {
+            path: 'edit_s_upload/:s_u_id',
+            component: AddSUploadComponent
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: 't_home',
+    component: TeacherhomeComponent,
+    children: [
+      {
+        path: 't_details',
+        component: TeacherdetailsComponent
+      },
+      // {
+      //   path:'add_teacher/:t_id',
+      //   component:AddteacherComponent
+      // },
+      {
+        path: 's_details',
+        component: StudentdetailsComponent,
+        children: [
+          {
+            path: 'edit_student/:_id',
+            component: AddstudentComponent
+          }
+        ]
+      },
+      {
+        path: 'add_student',
+        component: AddstudentComponent
+      },
+      // {
+      //   path:'add_student/:s_id',
+      //   component:AddstudentComponent
+      // },
+      {
+        path: 'add_t_upload',
+        component: AddTUploadComponent
+      },
+      {
+        path: 't_upload',
+        component: TeacheruploadComponent,
+        children: [
+          {
+            path: 'edit_t_upload/:_id',
+            component: AddTUploadComponent
+          },
+          {
+            path: 'add_s_upload/:t_u_id',
+            component: AddSUploadComponent
+          }
+        ]
+      },
+      // {
+      //   path: 'add_t_upload/:email',
+      //   component: AddTUploadComponent
+      // },
+      {
+        path: 's_upload',
+        component: StudentuploadComponent,
+        children: [
+          {
+            path: 'edit_s_upload/:s_u_id',
+            component: AddSUploadComponent
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: 's_home',
+    component: StudenthomeComponent,
+    children: [
+      {
+        path: 't_upload',
+        component: TeacheruploadComponent,
+        children: [
+          {
+            path: 'add_s_upload/:t_u_id',
+            component: AddSUploadComponent
+          }
+        ]
       },
       
       {
-        path:'s_upload',
-        component:StudentuploadComponent,
-        children:[
+        path: 'add_s_upload/:t_u_id',
+        component: AddSUploadComponent
+      },
+      {
+        path: 's_upload',
+        component: StudentuploadComponent,
+        children: [
           {
-            path:'edit_s_upload/:s_u_id',
-            component:AddSUploadComponent
+            path: 'edit_s_upload/:s_u_id',
+            component: AddSUploadComponent
           }
         ]
       }
-            
+      // {
+      //   path: 'edit_s_upload/:s_u_id',
+      //   component: AddSUploadComponent
+      // }
     ]
-  },
-  {
-    path:'t_home',
-    component:TeacherhomeComponent,
-    children:[
-      {
-        path:'t_details',
-        component:TeacherdetailsComponent
-      },
-      {
-        path:'add_teacher/:t_id',
-        component:AddteacherComponent
-      },
-      {
-        path:'s_details',
-        component:StudentdetailsComponent
-      },
-      {
-        path:'add_student',
-        component:AddstudentComponent
-      },
-      {
-        path:'add_student/:s_id',
-        component:AddstudentComponent
-      },
-      {
-        path:'t_upload',
-        component:TeacheruploadComponent
-      },
-      {
-        path:'add_t_upload',
-        component:AddTUploadComponent
-      },
-      {
-        path:'add_t_upload/:email',
-        component:AddTUploadComponent
-      },
-      {
-        path:'s_upload',
-        component:StudentuploadComponent
-      }
-    ]
-  },
-  {
-    path:'s_home',
-    component:StudenthomeComponent,
-    children:[
-      {
-        path:'t_upload',
-        component:TeacheruploadComponent
-      },
-      {
-        path:'s_upload',
-        component:StudentuploadComponent
-      },
-      {
-        path:'add_s_upload',
-        component:StudentuploadComponent
-      },
-      {
-        path:'edit_s_upload/:s_u_id',
-        component:AddSUploadComponent
-      }
-    ]
-  }  
+  }
 ];
 
 @NgModule({

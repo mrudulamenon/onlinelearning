@@ -126,6 +126,7 @@ export class AddteacherComponent implements OnInit {
       this._id = params['_id'];
     }))) {
       console.log("id" + this._id);
+      this.title="Edit Teacher"
       this.teacherService.editTeacher(this._id).subscribe((data) => {
         this.teacher = JSON.parse(JSON.stringify(data));
         //console.log(data);

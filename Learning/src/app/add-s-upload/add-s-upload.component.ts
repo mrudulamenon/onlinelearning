@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentUploadModel } from './studentupload.model';
 import { StudentUploadService } from '../student-upload.service';
+import { StudentModel } from '../addstudent/addstudent.model';
+import { StudentService } from '../student.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
@@ -17,106 +19,59 @@ export class AddSUploadComponent implements OnInit {
 
   title1: String = "Add Student Upload";
 
-  constructor(private a_route: ActivatedRoute, private _auth: AuthService, private studentUploadService: StudentUploadService, private _route: Router) {
+  constructor(private a_route: ActivatedRoute, private studentService: StudentService, private _auth: AuthService, private studentUploadService: StudentUploadService, private _route: Router) {
     this._route.routeReuseStrategy.shouldReuseRoute = () => false;
   }
   user_id = localStorage.getItem("user_id");
   msg = "";
   _id = "";  //for editing
-  // classobjarr = <any>[];
-  // subobjarr = <any>[];
-  // classlist = [];
-  // subjectlist = [];
-  // categorylist = ["Video Tutorial","Work Sheet","Assignment"];
-  s_upload = new StudentUploadModel(null, null, null, null, null,null);
+  s_upload = new StudentUploadModel(null, null, null, null, null, null, null, null);
+  // student: StudentModel[];
+  student = new StudentModel(null, null, null, null, null, null, null, null, null);
+
   usertype = localStorage.getItem("type");
-  // dropdownList1 = [];
-  // selectedItems1 = [];
-  // dropdownSettings1: IDropdownSettings = {};
 
   ngOnInit(): void {
     // this._auth.getAuthentication
     this.validatepage();
-    this.s_upload.s_u_date=new Date();
-
+    this.s_upload.user_id = this.user_id;
+    this.a_route.params.subscribe(params => {
+      this.s_upload.t_upload_id = params['t_u_id'];
+    });
+    //Setting Date
+    this.s_upload.s_u_date = new Date();
+    //Setting Class and Division
+    if (this.usertype == "student") {
+      this.studentService.getStudentWithUserId(this.user_id).subscribe((data) => {
+        this.s_upload.s_u_class = data['s_class'];
+        this.s_upload.s_u_div = data['s_div'];
+      });
+    }
+    else {
+      this.s_upload.s_u_class = 'Nill';
+      this.s_upload.s_u_div = 'Nill';
+    }
+    //Calling isedit
     this.isedit();
-    // this.dropdownSettings1 = {
-    //   singleSelection: false,
-    //   idField: 'item_id',
-    //   textField: 'item_text',
-    //   selectAllText: 'Select All',
-    //   unSelectAllText: 'UnSelect All',
-    //   itemsShowLimit: 7,
-    //   allowSearchFilter: true
-    // };
-    // this.getClasses();
-    // this.getSubjects();
   }
-  // getSubjects() {
-  //   return this._auth.getSubjects()
-  //     .subscribe(
-  //       res => {
-  //         this.subobjarr = JSON.parse(JSON.stringify(res));
-  //         this.subjectlist = this.subobjarr.map(({ subject }) => subject);
-  //         console.log(this.subobjarr);
-  //         console.log(this.subjectlist);
-  //         this.dropdownList1 = this.subjectlist;
-  //         return this.subjectlist;
-  //       },
-  //       err => {
-  //         console.log(err);
-  //         this.msg = err.error;
-  //       }
-  //       // err => console.log(err)
-  //     );
-  // }
-  // onItemSelect(item: any) {
-  //   console.log(item);
-  //   console.log(this.selectedItems1);
-  // }
-  // onSelectAll(items: any) {
-  //   console.log(items);
-  // }
-
-  // getClasses() {
-
-  //   return this._auth.getClasses()
-  //     .subscribe(
-  //       res => {
-  //         this.classobjarr = JSON.parse(JSON.stringify(res));
-  //         this.classlist = this.classobjarr.map(({ classs }) => classs);
-  //         console.log(this.classobjarr);
-  //         console.log(this.classlist);
-  //         this.dropdownList1 = this.classlist;
-  //         return this.classlist;
-  //       },
-  //       err => {
-  //         console.log(err);
-  //         this.msg = err.error;
-  //       }
-  //       // err => console.log(err)
-  //     );
-  // }
-  isedit() {
-    // if (!!this.a_route.params['_id']) {
-    if (!!(this.a_route.params.subscribe(params => {
+  isedit() {    
+    this.a_route.params.subscribe(params => {
       this._id = params['_id'];
-    }))) {
-      console.log("id" + this._id);
+    })
+    if (this._id != undefined) {
       this.studentUploadService.editS_Upload(this._id).subscribe((data) => {
         this.s_upload = JSON.parse(JSON.stringify(data));
-        //console.log(data);        
       });
     }
     else {
       this._id = "";
     }
   }
-  IfStudent(){
-    if(this.usertype=='student'){
+  IfStudent() {
+    if (this.usertype == 'student') {
       return true;
     }
-    else{
+    else {
       return false;
     }
 
@@ -139,7 +94,7 @@ export class AddSUploadComponent implements OnInit {
   }
   AddS_Upload(newStuUpldForm) {
     console.log(this._id);
-    if (this._id == null) {
+    if (this._id == "") {
       console.log(this.s_upload);
       this.studentUploadService.addS_Upload(this.s_upload)
         .subscribe(
@@ -151,6 +106,9 @@ export class AddSUploadComponent implements OnInit {
               this._route.navigate(['/a_home/s_upload']);
             }
             else if (this.usertype == 'teacher') {
+              this._route.navigate(['/t_home/s_upload']);
+            }
+            else if (this.usertype == 'student') {
               this._route.navigate(['/s_home/s_upload']);
             }
           },
