@@ -93,8 +93,5 @@ export class StudentdetailsComponent implements OnInit {
           // this.router.navigate(['/']);
         });
     }
-    else {
-      this._route.navigate(['/']);
-    }
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 import { HomeComponent } from './home/home.component';
 import { TeacherhomeComponent } from './teacherhome/teacherhome.component';
@@ -17,7 +18,8 @@ import { ClassesComponent } from './classes/classes.component';
 import { LoginComponent } from './login/login.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { AddSUploadComponent } from './add-s-upload/add-s-upload.component';
-
+import { RegisterComponent } from './register/register.component';
+import { ViewUserComponent } from './view-user/view-user.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,66 +35,79 @@ const routes: Routes = [
   //   path:'login',
   //   component:LoginComponent
   // },
-  // {
-  //   path:'register',
-  //   component:AddteacherComponent
-  // },
+  {
+    path:'register',
+    component:RegisterComponent
+  },
   {
     path: 'a_home',
     component: AdminhomeComponent,
+    canActivate:[AuthGuard],
     children: [
       {
         path: 'admins',
-        component: AddAdminComponent
+        component: AddAdminComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 'subjects',
-        component: SubjectsComponent
+        component: SubjectsComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 'class',
-        component: ClassesComponent
+        component: ClassesComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 't_details',
         component: TeacherdetailsComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_teacher/:_id',
-            component: AddteacherComponent
+            component: AddteacherComponent,
+            canActivate:[AuthGuard]
           }
         ]
       },
       {
         path: 'add_teacher',
-        component: AddteacherComponent
+        component: AddteacherComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 's_details',
         component: StudentdetailsComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_student/:_id',
-            component: AddstudentComponent
+            component: AddstudentComponent,
+            canActivate:[AuthGuard]
           }
         ]
       },
       {
         path: 'add_student',
-        component: AddstudentComponent
+        component: AddstudentComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 'add_t_upload',
-        component: AddTUploadComponent
+        component: AddTUploadComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 't_upload',
         component: TeacheruploadComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_t_upload/:_id',
-            component: AddTUploadComponent
-          },
+            component: AddTUploadComponent,
+            canActivate:[AuthGuard]
+          }
           // {
           //   path: 'add_s_upload/:t_u_id',
           //   component: AddSUploadComponent
@@ -101,15 +116,41 @@ const routes: Routes = [
       },
       {
         path: 'add_s_upload/:t_u_id',
-        component: AddSUploadComponent
+        component: AddSUploadComponent,
+        canActivate:[AuthGuard]
       },
       {
-        path: 's_upload',
+        path: 'view_s_upload/:t_u_id',
         component: StudentuploadComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_s_upload/:_id',
-            component: AddSUploadComponent
+            component: AddSUploadComponent,
+            canActivate:[AuthGuard]
+          },
+          {
+            path: 'view_user/:user_id',
+            component: ViewUserComponent,
+            canActivate:[AuthGuard]
+          }
+        ]
+      },      
+      
+      {
+        path: 's_upload',
+        component: StudentuploadComponent,
+        canActivate:[AuthGuard],
+        children: [
+          {
+            path: 'edit_s_upload/:_id',
+            component: AddSUploadComponent,
+            canActivate:[AuthGuard]
+          },
+          {
+            path: 'view_user/:user_id',
+            component: ViewUserComponent,
+            canActivate:[AuthGuard]
           }
         ]
       }
@@ -118,10 +159,19 @@ const routes: Routes = [
   {
     path: 't_home',
     component: TeacherhomeComponent,
+    canActivate:[AuthGuard],
     children: [
       {
         path: 't_details',
-        component: TeacherdetailsComponent
+        component: TeacherdetailsComponent,
+        canActivate:[AuthGuard],
+        children: [
+          {
+            path: 'edit_teacher/:_id',
+            component: AddteacherComponent,
+            canActivate:[AuthGuard]
+          }
+        ]
       },
       // {
       //   path:'add_teacher/:t_id',
@@ -130,16 +180,19 @@ const routes: Routes = [
       {
         path: 's_details',
         component: StudentdetailsComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_student/:_id',
-            component: AddstudentComponent
+            component: AddstudentComponent,
+            canActivate:[AuthGuard]
           }
         ]
       },
       {
         path: 'add_student',
-        component: AddstudentComponent
+        component: AddstudentComponent,
+        canActivate:[AuthGuard]
       },
       // {
       //   path:'add_student/:s_id',
@@ -147,33 +200,67 @@ const routes: Routes = [
       // },
       {
         path: 'add_t_upload',
-        component: AddTUploadComponent
+        component: AddTUploadComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 't_upload',
         component: TeacheruploadComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_t_upload/:_id',
-            component: AddTUploadComponent
-          },
-          {
-            path: 'add_s_upload/:t_u_id',
-            component: AddSUploadComponent
+            component: AddTUploadComponent,
+            canActivate:[AuthGuard]
           }
+          // {
+          //   path: 'add_s_upload/:t_u_id',
+          //   component: AddSUploadComponent,
+          //   canActivate:[AuthGuard]
+          // }
         ]
+      },
+      {
+        path: 'add_s_upload/:t_u_id',
+        component: AddSUploadComponent,
+        canActivate:[AuthGuard]
       },
       // {
       //   path: 'add_t_upload/:email',
       //   component: AddTUploadComponent
       // },
       {
-        path: 's_upload',
+        path: 'view_s_upload/:t_u_id',
         component: StudentuploadComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_s_upload/:_id',
-            component: AddSUploadComponent
+            component: AddSUploadComponent,
+            canActivate:[AuthGuard]
+          },
+          {
+            path: 'view_user/:user_id',
+            component: ViewUserComponent,
+            canActivate:[AuthGuard]
+          }
+        ]
+      },      
+      
+      {
+        path: 's_upload',
+        component: StudentuploadComponent,
+        canActivate:[AuthGuard],
+        children: [
+          {
+            path: 'edit_s_upload/:_id',
+            component: AddSUploadComponent,
+            canActivate:[AuthGuard]
+          },
+          {
+            path: 'view_user/:user_id',
+            component: ViewUserComponent,
+            canActivate:[AuthGuard]
           }
         ]
       }
@@ -182,29 +269,35 @@ const routes: Routes = [
   {
     path: 's_home',
     component: StudenthomeComponent,
+    canActivate:[AuthGuard],
     children: [
       {
         path: 't_upload',
         component: TeacheruploadComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'add_s_upload/:t_u_id',
-            component: AddSUploadComponent
+            component: AddSUploadComponent,
+            canActivate:[AuthGuard]
           }
         ]
       },
       
       {
         path: 'add_s_upload/:t_u_id',
-        component: AddSUploadComponent
+        component: AddSUploadComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 's_upload',
         component: StudentuploadComponent,
+        canActivate:[AuthGuard],
         children: [
           {
             path: 'edit_s_upload/:_id',
-            component: AddSUploadComponent
+            component: AddSUploadComponent,
+            canActivate:[AuthGuard]
           }
         ]
       }

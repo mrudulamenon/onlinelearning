@@ -80,11 +80,11 @@
                                     <tr>
                                         <td><label>Phone</label></td>
                                         <td><input type="text" name="s_phone" [(ngModel)]="student.s_phone"
-                                                class="form-control rounded-0" #s_phone="ngModel"
+                                                class="form-control rounded-0" #s_phone="ngModel" minlength="10"
                                                 [class.is-invalid]="s_phone.invalid && s_phone.touched" />
                                             <small class="text-danger"
                                                 [class.d-none]="s_phone.valid || s_phone.untouched">Enter
-                                                a Phone Number</small>
+                                                a Phone Number - Minimum Length 10</small>
                                         </td>
                                     </tr>
                                     <tr>

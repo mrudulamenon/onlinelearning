@@ -52,8 +52,8 @@ export class AddstudentComponent implements OnInit {
         //   this.subjects=this.subobjarr["subject"];
         // }
        this.s_classes= this.classobjarr.map(({classs})=>classs);
-      console.log(this.classobjarr);
-      console.log(this.s_classes);
+      // console.log(this.classobjarr);
+      // console.log(this.s_classes);
       return this.s_classes;
       },
       err => {
@@ -65,16 +65,18 @@ export class AddstudentComponent implements OnInit {
   }
   isedit() {
     // if (!!this.a_route.params['_id']) {
-      if(!!(this.a_route.params.subscribe(params => {
-        this.if_id = params['_id'];
-      }))){
+      // if(!!(this.a_route.params.subscribe(params => {
+      //   this.if_id = params['_id'];
+      // }))){
+        this.a_route.params.subscribe(params => {
+          this._id = params['_id'];});
+          if(this._id!=undefined){  
         this._id=this.if_id;
         this.title = "Edit Student"
       console.log("id" + this._id);
       this.studentService.editStudent(this._id).subscribe((data) => {
         this.student = JSON.parse(JSON.stringify(data));
-        //console.log(data);
-        //console.log(this.productItem);  
+        console.log(data);
         this.user_id = this.student.user_id;
         this._auth.editUser(this.user_id)
           .subscribe((data) => {
@@ -114,7 +116,7 @@ export class AddstudentComponent implements OnInit {
   AddStudent(newStuForm) {
     console.log(this._id);
     
-    if (this._id == null) {
+    if (this._id == "") {
 
       console.log(this.student);
       this.student.email = this.user.email;
@@ -142,7 +144,7 @@ export class AddstudentComponent implements OnInit {
                 }
                 else if (this.usertype == 'teacher') {
                   this._route.navigate(['/t_home/s_details']);
-                }
+                }                
               },
               err => {
                 console.log(err);

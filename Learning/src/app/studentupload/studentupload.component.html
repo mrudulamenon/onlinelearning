@@ -1,17 +1,19 @@
 <router-outlet></router-outlet>
 <div class="card">
     <div class="card-header row">
-        <h3 class="col-3">{{title}}</h3>
+        <h3 class="mx-3">{{title}}</h3>
         <div>
             <form class="form-inline" #newFilTUpld="ngForm" (ngSubmit)="filterlist()">
-                <select name="s_fil_class" id="s_fil_class" [(ngModel)]="filter.classs"
-                    class="form-control rounded-0 mx-3 d-inline" #s_fil_class="ngModel" 
-                    [class.is-invalid]="s_fil_class.invalid && s_fil_class.touched" required>
-                    <option value="" selected>Select Class</option>
-                    <option *ngFor="let dl of classlist" [value]="dl">{{dl}}</option>
-                </select>
-                <small class="text-danger" [class.d-none]="s_fil_class.valid || s_fil_class.untouched">Enter a Class </small>
-                <!-- <select name="s_fil_sub" id="s_fil_sub" [(ngModel)]="filter.subjects"
+                <div *ngIf="!IfStudent()">
+                    <select name="s_fil_class" id="s_fil_class" [(ngModel)]="filter.classs"
+                        class="form-control rounded-0 mx-3 d-inline" #s_fil_class="ngModel"
+                        [class.is-invalid]="s_fil_class.invalid && s_fil_class.touched" required>
+                        <option value="" selected>Select Class</option>
+                        <option *ngFor="let dl of classlist" [value]="dl">{{dl}}</option>
+                    </select>
+                    <small class="text-danger" [class.d-none]="s_fil_class.valid || s_fil_class.untouched">Enter a Class
+                    </small>
+                    <!-- <select name="s_fil_sub" id="s_fil_sub" [(ngModel)]="filter.subjects"
                     class="form-control rounded-0 mx-3 d-inline"  #s_fil_sub="ngModel" 
                     [class.is-invalid]="s_fil_sub.invalid && s_fil_sub.touched" required>
                     <option value="" selected>Select Subject</option>
@@ -19,9 +21,11 @@
                 </select>
                 <small class="text-danger" [class.d-none]="s_fil_sub.valid || s_fil_sub.untouched">Enter a Subject</small> -->
 
-                <button type="submit" [disabled]="newFilTUpld.form.invalid" class="btn btn-info"
-                >Get
-                    Student Uploads</button>
+                    <button type="submit" [disabled]="newFilTUpld.form.invalid" class="btn btn-info">Get Student
+                        Uploads</button>
+                </div>
+                <div *ngIf="IfStudent()" >My Uploads</div>
+
             </form>
         </div>
     </div>
@@ -30,22 +34,25 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Description</th>
-                        <th>Upload</th>
                         <th>Class</th>
                         <th>Division</th>
+                        <th>Students Submission</th>
                         <th>Date</th>
+                        <th>Teacher Comment</th>
+                        <th *ngIf="(loggedIn())&&(usertype!='student')">View User</th>
                         <th *ngIf="loggedIn()">Edit</th>
                         <th *ngIf="loggedIn()">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let s_upload of s_uploads'>
-                        <td>{{ s_upload.description }}</td>
-                        <td>{{ s_upload.upload}}</td>
                         <td>{{ s_upload.s_u_class}}</td>
                         <td>{{ s_upload.s_u_div}}</td>
+                        <td><a href="{{ s_upload.upload}}">{{ s_upload.description }}</a></td>
                         <td>{{ s_upload.s_u_date}}</td>
+                        <td>{{ s_upload.t_comment}}</td>
+                        <td *ngIf="(loggedIn())&&(usertype!='student')"><a routerLink='view_user/{{s_upload.user_id}}'
+                            class="btn btn-primary">View User</a></td>
                         <td *ngIf="loggedIn()"><a routerLink='edit_s_upload/{{s_upload._id}}'
                                 class="btn btn-primary">Edit</a></td>
                         <td *ngIf="loggedIn()"><a (click)="deleteS_Upload(s_upload._id)" style="color:white"

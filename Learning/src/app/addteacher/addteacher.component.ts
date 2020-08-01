@@ -78,8 +78,8 @@ export class AddteacherComponent implements OnInit {
           //   this.subjects=this.subobjarr["subject"];
           // }
           this.subjects = this.subobjarr.map(({ subject }) => subject);
-          console.log(this.subobjarr);
-          console.log(this.subjects);
+          // console.log(this.subobjarr);
+          // console.log(this.subjects);
           this.dropdownList2 = this.subjects;
           return this.subjects;
         },
@@ -108,8 +108,8 @@ export class AddteacherComponent implements OnInit {
           //   this.subjects=this.subobjarr["subject"];
           // }
           this.t_classlist = this.classobjarr.map(({ classs }) => classs);
-          console.log(this.classobjarr);
-          console.log(this.t_classlist);
+          // console.log(this.classobjarr);
+          // console.log(this.t_classlist);
           this.dropdownList1 = this.t_classlist;
           return this.t_classlist;
         },
@@ -122,9 +122,12 @@ export class AddteacherComponent implements OnInit {
   }
   isedit() {
     // if (!!this.a_route.params['_id']) {
-    if (!!(this.a_route.params.subscribe(params => {
-      this._id = params['_id'];
-    }))) {
+    // if (!!(this.a_route.params.subscribe(params => {
+    //   this._id = params['_id'];
+    // }))) {
+      this.a_route.params.subscribe(params => {
+        this._id = params['_id'];});
+        if(this._id!=undefined){
       console.log("id" + this._id);
       this.title="Edit Teacher"
       this.teacherService.editTeacher(this._id).subscribe((data) => {
@@ -170,7 +173,7 @@ export class AddteacherComponent implements OnInit {
   AddTeacher(newTcrForm) {
     console.log(this._id);
 
-    if (this._id == null) {
+    if (this._id == "") {
 
       console.log(this.teacher);
       this.teacher.email = this.user.email;

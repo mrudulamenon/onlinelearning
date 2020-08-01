@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   
   loginUserDetails = { email: "", password: "" , usertype:""};
   error="";
+  msg="";
   constructor(private a_route:ActivatedRoute,private _auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,9 +26,9 @@ export class LoginComponent implements OnInit {
     this._auth.loginUser(this.loginUserDetails)
       .subscribe(
         res => {
-          console.log(res);
-          console.log(res["token"]);
-          console.log(res["payload"]);
+          // console.log(res);
+          // console.log(res["token"]);
+          // console.log(res["payload"]);
           const payload = res["payload"];
           localStorage.setItem('token', res["token"]);
           localStorage.setItem('type', payload.type);
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
           }
         },
         err => {console.log(err);
-        
+          this.msg=err.error;        
         }
         // res=>{
         //     alert("Success");
@@ -55,7 +56,5 @@ export class LoginComponent implements OnInit {
         //   }      
       );
     // alert("Success");
-  }
-
-  
+  }  
 }

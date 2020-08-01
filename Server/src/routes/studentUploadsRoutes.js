@@ -49,6 +49,55 @@ studentUploadsRouter.post('/filters_uploads', function (req, res) {
     });
 });
 
+studentUploadsRouter.post('/filter_t_u_s_uploads', function (req, res) {
+    console.log("inside rout");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+    console.log(req.body);
+    let t_u_filter = req.body;
+    console.log("filter_id");
+    console.log(t_u_filter);
+    StudentUploadsData.find({ t_upload_id:t_u_filter.t_u_id }, (err, filters_uploads) => {
+        if (err) {
+            console.log("Error");
+            console.log(err);
+        } else {
+            console.log("got Student Upload");
+            console.log(filters_uploads);
+            if (!filters_uploads) {
+                res.status(401).send("No Student Upload to display");
+            }
+            else {
+                res.send(filters_uploads);
+            }
+        }
+    });
+});
+
+studentUploadsRouter.post('/filterowns_uploads', function (req, res) {
+    console.log("inside rout");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+    console.log(req.body);
+    let ownfilter = req.body;
+    console.log("user_id");
+    console.log(ownfilter);
+    StudentUploadsData.find({ user_id:ownfilter.user_id }, (err, filters_uploads) => {
+        if (err) {
+            console.log("Error");
+            console.log(err);
+        } else {
+            console.log("got Student Upload");
+            console.log(filters_uploads);
+            if (!filters_uploads) {
+                res.status(401).send("No Student Upload to display");
+            }
+            else {
+                res.send(filters_uploads);
+            }
+        }
+    });
+});
 studentUploadsRouter.get('/edits_upload/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");

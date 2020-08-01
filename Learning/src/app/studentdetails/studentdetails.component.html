@@ -11,7 +11,7 @@
             </select>
             <select name="s_div" id="s_div" [(ngModel)]="filter.s_div" class="form-control rounded-0 mx-3 d-inline"
                 #s_fil_div="ngModel" [class.is-invalid]="s_fil_div.invalid && s_fil_div.touched" required>
-                <option value="" selected>Select Class</option>
+                <option value="" selected>Select Division</option>
                 <option *ngFor="let dl of s_divs" [value]="dl">{{dl}}</option>
             </select>
             <button type="submit" [disabled]="newFilStu.form.invalid" class="btn btn-info">Get Students</button>
@@ -22,28 +22,28 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Class</th>
+                        <th>Division</th>
                         <th>Student Id</th>
                         <th>Roll No</th>
                         <th>Student Name</th>
                         <th>E-mail</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Class</th>
-                        <th>Division</th>
                         <th *ngIf="loggedIn()">Edit</th>
                         <th *ngIf="loggedIn()">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let student of students'>
+                        <td>{{ student.s_class}}</td>
+                        <td>{{ student.s_div}}</td>
                         <td>{{ student.s_id }}</td>
                         <td>{{ student.roll_no }}</td>
                         <td>{{ student.s_name }}</td>
                         <td>{{ student.email }}</td>
                         <td>{{ student.s_address }}</td>
                         <td>{{ student.s_phone }}</td>
-                        <td>{{ student.s_class}}</td>
-                        <td>{{ student.s_div}}</td>
                         <td *ngIf="loggedIn()"><a routerLink='edit_student/{{student._id}}'
                                 class="btn btn-primary">Edit</a></td>
                         <td *ngIf="loggedIn()"><a (click)="deleteStudent(student._id)" style="color:white"

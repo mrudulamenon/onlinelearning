@@ -29,6 +29,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { RegisterComponent } from './register/register.component';
+import { ViewUserComponent } from './view-user/view-user.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     SubjectsComponent,
     ClassesComponent,
     LoginComponent,
-    AddAdminComponent
+    AddAdminComponent,
+    RegisterComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,

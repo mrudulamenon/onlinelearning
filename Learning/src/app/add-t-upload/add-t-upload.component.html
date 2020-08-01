@@ -18,6 +18,10 @@
                                         </td>
                                         <td>
                                             <label for="date">{{t_upload.t_u_date | date: 'medium' }}</label>
+                                            <!-- <input type="date">
+                                            <input type="text" name="t_u_date" [(ngModel)]="t_upload.t_u_date"
+                                                class="form-control rounded-0" #t_u_date="ngModel"
+                                                disabled required value="{{t_upload.t_u_date | date: 'medium' }}"/>-->
                                         </td>
                                     </tr>
                                     <tr>
@@ -111,11 +115,11 @@
                                     <tr>
                                         <td><label>Upload Link</label></td>
                                         <td><input type="text" name="upload" [(ngModel)]="t_upload.upload"
-                                                class="form-control rounded-0" #upload="ngModel"
+                                                class="form-control rounded-0" #upload="ngModel" pattern='^(ftp|http|https):\/\/[^ "]+$'
                                                 [class.is-invalid]="upload.invalid && upload.touched" />
                                             <small class="text-danger"
                                                 [class.d-none]="upload.valid || upload.untouched">Enter
-                                                Address</small>
+                                                a valid link</small>
                                         </td>
                                     </tr>
                                     <tr>

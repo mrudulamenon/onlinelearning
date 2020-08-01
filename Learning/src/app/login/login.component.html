@@ -4,9 +4,10 @@
             <!-- form card login  -->
 
                 <div class="card-body">
+                    <label class="text-danger">{{msg}}</label>
                     <form class="form" #userLogin="ngForm" (ngSubmit)="loginUser()">
-                        <div class="form-group">
-                            <label for="uname1">Username</label>
+                        <div class="form-group">                            
+                            <label for="uname1">E-Mail</label>
                             <input name="email" type="text" class="form-control rounded-0"
                                 [(ngModel)]="loginUserDetails.email" #email="ngModel"
                                 [class.is-invalid]="email.invalid && email.touched"

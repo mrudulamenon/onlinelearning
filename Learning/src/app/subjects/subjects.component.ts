@@ -92,7 +92,6 @@ export class SubjectsComponent implements OnInit {
   }
 
   editSubject(id) {
-    // let id = localStorage.getItem("SubjectId");
     this.MyValue = true;
     this.edit_id = id;
     this._auth.editSubject(id)

@@ -1,0 +1,23 @@
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table">
+                <tr>
+                    <td><label>Email</label></td>
+                    <td><label>{{user.email}}</label></td>
+                </tr>
+                <tr *ngIf="getUserType()=='student'">
+                    <td><label>Student Name</label></td>
+                    <td><label>{{student.s_name}}</label></td>
+                </tr>
+                <tr *ngIf="getUserType()=='student'">
+                    <td><label>Student Phone</label></td>
+                    <td><label>{{student.s_phone}}</label></td>
+                </tr>
+                <tr *ngIf="getUserType()=='student'">
+                    <td><label>Roll Number</label></td>
+                    <td><label>{{student.roll_no}}</label></td>
+                </tr>
+                
+        </table>
+    </div>
+</div>

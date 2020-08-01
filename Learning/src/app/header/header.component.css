@@ -1,3 +1,21 @@
 h1{
     font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    color: ivory;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px aqua;
+    margin-bottom: 20px;
+    /* position: relative; */
+    animation: text 3s infinite;
 }
+@keyframes text{
+    0%{letter-spacing: 1px;
+    }
+    50%{
+        letter-spacing: 5px;
+    }
+    100%{
+        letter-spacing: 1px;
+    }
+}
+

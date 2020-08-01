@@ -45,8 +45,5 @@ export class TeacherdetailsComponent implements OnInit {
           // this.router.navigate(['/']);
         });
     }
-    else{
-      this._route.navigate(['/']);
-    }
   }
 }

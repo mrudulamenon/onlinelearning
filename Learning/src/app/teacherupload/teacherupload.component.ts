@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherUploadModel } from '../add-t-upload/teacherupload.model';
 import { TeacherUploadService } from '../teacher-upload.service';
+import { StudentModel } from '../addstudent/addstudent.model';
+import { StudentService } from '../student.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
@@ -23,7 +25,9 @@ export class TeacheruploadComponent implements OnInit {
   subjectlist = [];
   _id = "";
   user_id = "";
-  constructor(private _auth: AuthService, private t_uploadService: TeacherUploadService, private _route: Router) { }
+  s_class = "";
+  usertype = localStorage.getItem('type');
+  constructor(private _auth: AuthService, private studentService: StudentService, private t_uploadService: TeacherUploadService, private _route: Router) { }
 
   loggedIn() {
     return this._auth.loggedIn();
@@ -33,28 +37,54 @@ export class TeacheruploadComponent implements OnInit {
     this.user_id = localStorage.getItem('user_id');
     this.getClasses();
     this.getSubjects();
+    if (this.usertype == "student") {
+      this.getStuClass();
+    } else
+      if (this.filter.classs == "" && this.filter.subjects == "") {
+        this.getT_Uploads();
+      }
+      else {
+        this.filterlist();
+      }
+  }
+  filterClassList() {
+    console.log(this.filter);    
+    this.t_uploadService.getFilterClassT_Uploads(this.filter)
+      .subscribe((data) => {
+        this.t_uploads = JSON.parse(JSON.stringify(data));
+      });
+  }
+  getStuClass() {
+    if (this.usertype == "student") {
+      this.studentService.getStudentWithUserId(this.user_id).subscribe((data) => {
+        this.s_class = data['s_class'];
+        this.filter.classs = data['s_class'];
+        this.filterClassList();
+      });
+    }
 
-    if (this.filter.classs == "" && this.filter.subjects == "") {
-      this.getT_Uploads();
+  }
+  IfStudent() {
+    if (this.usertype == 'student') {
+      return true;
     }
     else {
-      this.filterlist();
+      return false;
     }
+
   }
+
   getSubjects() {
     return this._auth.getSubjects()
       .subscribe(
         res => {
           this.subobjarr = JSON.parse(JSON.stringify(res));
           this.subjectlist = this.subobjarr.map(({ subject }) => subject);
-          console.log(this.subobjarr);
-          console.log(this.subjectlist);
-          // this.dropdownList1 = this.subjectlist;
           return this.subjectlist;
         },
         err => {
           console.log(err);
-          this.msg = err.error;
+          this.msg = "No Subjects to Display";
         }
         // err => console.log(err)
       );
@@ -65,7 +95,6 @@ export class TeacheruploadComponent implements OnInit {
       .subscribe((data) => {
         this.t_uploads = JSON.parse(JSON.stringify(data));
       });
-
   }
 
   getClasses() {
@@ -74,21 +103,16 @@ export class TeacheruploadComponent implements OnInit {
         res => {
           this.classobjarr = JSON.parse(JSON.stringify(res));
           this.classlist = this.classobjarr.map(({ classs }) => classs);
-          console.log(this.classobjarr);
-          console.log(this.classlist);
-          // this.dropdownList1 = this.classlist;
           return this.classlist;
         },
         err => {
           console.log(err);
-          this.msg = err.error;
+          this.msg = "No class to display";
         }
         // err => console.log(err)
       );
   }
   filterlist() {
-    console.log("filter");
-    console.log(this.filter);
     this.t_uploadService.getFilterT_Uploads(this.filter)
       .subscribe((data) => {
         this.t_uploads = JSON.parse(JSON.stringify(data));
@@ -104,12 +128,8 @@ export class TeacheruploadComponent implements OnInit {
       this.t_uploadService.deleteT_Upload(id)
         .subscribe((data) => {
           this.t_uploads = JSON.parse(JSON.stringify(data));
-          // console.log("deleted" + data);
           // this.router.navigate(['/']);
         });
-    }
-    else {
-      this._route.navigate(['/']);
     }
   }
 

@@ -17,14 +17,16 @@
                                             <label>Uploading Date</label>
                                         </td>
                                         <td>
-                                            <label for="date" name="s_u_date" [(ngModel)]="s_upload.s_u_date">{{s_upload.s_u_date | date: 'medium'}}</label>
+                                            <label for="date" name="s_u_date"
+                                                [(ngModel)]="s_upload.s_u_date">{{ s_upload.s_u_date | date: 'medium'}}</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label>Description</label><span class="text-danger">*</span></td>
                                         <td><input type="text" name="description" [(ngModel)]="s_upload.description"
                                                 class="form-control rounded-0" #description="ngModel"
-                                                [class.is-invalid]="description.invalid && description.touched" required/>
+                                                [class.is-invalid]="description.invalid && description.touched"
+                                                required />
                                             <small class="text-danger"
                                                 [class.d-none]="description.valid || description.untouched">Enter
                                                 Description</small>
@@ -33,13 +35,23 @@
                                     <tr>
                                         <td><label>Upload Link</label><span class="text-danger">*</span></td>
                                         <td><input type="text" name="upload" [(ngModel)]="s_upload.upload"
-                                                class="form-control rounded-0" #upload="ngModel"
+                                                class="form-control rounded-0" #upload="ngModel" pattern='^(ftp|http|https):\/\/[^ "]+$'
                                                 [class.is-invalid]="upload.invalid && upload.touched" required />
                                             <small class="text-danger"
                                                 [class.d-none]="upload.valid || upload.untouched">Enter
-                                                Address</small>
+                                                a valid Link</small>
                                         </td>
                                     </tr>
+                                    <!-- <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="hidden" name="image" id="image" value="bookDefault.jpg">
+                                                <label for="image">Image Upload</label>
+                                                <input type="file" id="filetag" name="filetag">
+                                                <img src="" id="preview" height="100px">
+                                            </div>
+                                        </td>
+                                    </tr> -->
                                     <tr>
                                         <td><label>Teacher Comment</label></td>
                                         <td><input type="text" name="t_comment" [(ngModel)]="s_upload.t_comment"
